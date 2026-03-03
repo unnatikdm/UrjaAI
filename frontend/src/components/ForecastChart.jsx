@@ -9,10 +9,13 @@ function formatHour(ts) {
 
 function CustomTooltip({ active, payload, label }) {
     if (!active || !payload?.length) return null
+    // Filter out the confidence band (array value, not renderable as a number)
+    const visible = payload.filter(e => !Array.isArray(e.value))
+    if (!visible.length) return null
     return (
         <div className="bg-white border border-border rounded-xl p-3 text-xs shadow-xl">
             <p className="text-ink-muted mb-2 font-medium">{label}</p>
-            {payload.map((entry, i) => (
+            {visible.map((entry, i) => (
                 <div key={i} className="flex items-center gap-2 mb-1">
                     <span className="w-2 h-2 rounded-full" style={{ background: entry.color }} />
                     <span className="text-ink-soft capitalize">{entry.name}:</span>
@@ -22,6 +25,7 @@ function CustomTooltip({ active, payload, label }) {
         </div>
     )
 }
+
 
 export default function ForecastChart({ forecast, whatIfResult }) {
     if (!forecast) {
