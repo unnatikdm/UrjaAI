@@ -1,0 +1,18 @@
+Total Rows: 65332832
+Time Column Nulls: 0
+Data Column Nulls: 0
+
+Checking for duplicates (this may take a minute)...
+Rows with (file, time) duplicates: 0
+
+Data Stats:
+  Min: -70.0
+  Max: 75723.0
+  Avg: 738.1635515035019
+
+Top 5 extreme values:
+  (75723.0, 'RBHU-2025-01\\RBHU\\B201\\AH\\AH6xx\\B201AH601.AM35.parquet', '2025-01-08 18:54:46+05:30')
+  (75723.0, 'RBHU-2025-01\\RBHU\\B201\\AH\\AH6xx\\B201AH601.AM35.parquet', '2025-01-30 14:43:55+05:30')
+  (75723.0, 'RBHU-2025-01\\RBHU\\B201\\AH\\AH6xx\\B201AH601.AM35.parquet', '2025-01-30 15:22:48+05:30')
+  (75723.0, 'RBHU-2025-02\\RBHU\\B201\\AH\\AH6xx\\B201AH601.AM35.parquet', '2025-02-05 14:16:15+05:30')
+  (75720.4453, 'RBHU-2025-01\\RBHU\\B201\\AH\\AH6xx\\B201AH601.AM35.parquet', '2025-01-16 18:49:00+05:30')

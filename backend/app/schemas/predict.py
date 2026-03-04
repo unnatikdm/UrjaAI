@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import Optional
+from typing import Optional, List # Re-added List
 from pydantic import BaseModel
 
 
@@ -90,3 +90,17 @@ class WhatIfResponse(BaseModel):
     baseline_forecast: list[ForecastPoint]
     modified_forecast: list[ForecastPoint]
     delta_summary: str
+
+
+# ──────────────────────────────────────────────
+# /predict/batch  request & response
+# ──────────────────────────────────────────────
+
+class BatchPredictRequest(BaseModel):
+    building_ids: List[str]
+    horizon: int = 24
+    what_if_modifiers: Optional[WhatIfModifiers] = None
+
+
+class BatchPredictResponse(BaseModel):
+    results: List[PredictResponse]

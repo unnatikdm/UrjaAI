@@ -6,13 +6,17 @@ Returns pandas DataFrames for use by routers and business-logic services.
 """
 
 from __future__ import annotations
+import math
 import os
+import random
 from pathlib import Path
 from datetime import datetime, timedelta
 
 import pandas as pd
 
 DATA_DIR = Path(__file__).resolve().parents[2] / "data"
+WEATHER_CSV = Path(__file__).resolve().parents[2] / "mumbai_weather_2025.csv"
+
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Available buildings
@@ -112,3 +116,40 @@ def get_peak_and_total(building_id: str, hours: int = 24) -> dict:
         "peak_kw": round(float(recent["consumption_kwh"].max()), 2),
         "total_kwh": round(float(recent["consumption_kwh"].sum()), 2),
     }
+
+
+def get_weather_data() -> pd.DataFrame:
+    """
+    Load Mumbai weather data for ML model feature construction.
+
+    Looks for:  backend/mumbai_weather_2025.csv
+    Expected columns: date, temperature, humidity, apparent_temp, precipitation
+
+    Falls back to synthetic weather if the file is not found.
+    """
+    if WEATHER_CSV.exists():
+        df = pd.read_csv(WEATHER_CSV)
+        df["date"] = pd.to_datetime(df["date"], utc=True)
+        return df
+
+    # ── Synthetic fallback ────────────────────────────────────────────────────
+    # Generates a year of hourly Mumbai-like weather so ML code always has data.
+    rng = random.Random(42)
+    rows = []
+    start = datetime(2025, 1, 1)
+    for h in range(365 * 24):
+        ts = start + timedelta(hours=h)
+        # Mumbai: 25-35°C, higher humidity in monsoon (Jun-Sep)
+        month = ts.month
+        base_temp = 28 + 4 * math.sin(math.pi * (month - 3) / 6)
+        temp = base_temp + rng.uniform(-3, 3)
+        humid = 65 + (20 if 6 <= month <= 9 else 0) + rng.uniform(-10, 10)
+        rows.append({
+            "date": pd.Timestamp(ts, tz="UTC"),
+            "temperature": round(temp, 1),
+            "humidity": round(min(100, humid), 1),
+            "apparent_temp": round(temp + 2, 1),
+            "precipitation": round(rng.uniform(0, 5) if 6 <= month <= 9 else 0, 1),
+        })
+    return pd.DataFrame(rows)
+

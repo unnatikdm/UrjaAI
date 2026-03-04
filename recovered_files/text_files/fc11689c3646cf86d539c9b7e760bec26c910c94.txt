@@ -1,0 +1,140 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    body {
+        font-family: 'Inter', system-ui, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        color: #1a2e1e;
+        background-color: #ecfdf5;
+        background-image:
+            radial-gradient(ellipse at 10% 40%, rgba(34, 197, 94, 0.18) 0%, transparent 55%),
+            radial-gradient(ellipse at 90% 10%, rgba(134, 239, 172, 0.22) 0%, transparent 50%),
+            radial-gradient(ellipse at 55% 95%, rgba(22, 163, 74, 0.10) 0%, transparent 45%);
+        min-height: 100vh;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: #bbf7d0;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: #4ade80;
+        border-radius: 9999px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: #22c55e;
+    }
+}
+
+@layer components {
+    .card {
+        background-color: #ffffff;
+        border: 1px solid #86efac;
+        border-radius: 1rem;
+        box-shadow: 0 2px 8px rgba(34, 197, 94, 0.10);
+    }
+
+    .metric-card {
+        @apply card p-5 flex flex-col gap-2;
+        transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+    }
+
+    .metric-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(34, 197, 94, 0.2);
+        border-color: #22c55e;
+    }
+
+    .section-title {
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: #16a34a;
+        margin-bottom: 1rem;
+        display: block;
+    }
+
+    .badge {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.125rem 0.625rem;
+        border-radius: 9999px;
+        font-size: 0.7rem;
+        font-weight: 500;
+    }
+
+    .badge-high {
+        @apply badge;
+        background: #fef2f2;
+        color: #dc2626;
+        border: 1px solid #fecaca;
+    }
+
+    .badge-medium {
+        @apply badge;
+        background: #fffbeb;
+        color: #b45309;
+        border: 1px solid #fde68a;
+    }
+
+    .badge-low {
+        @apply badge;
+        background: #f0fdf4;
+        color: #15803d;
+        border: 1px solid #bbf7d0;
+    }
+
+    .badge-savings {
+        @apply badge;
+        background: #dcfce7;
+        color: #15803d;
+        border: 1px solid #4ade80;
+        font-weight: 600;
+    }
+
+    .gradient-line {
+        background: linear-gradient(90deg, transparent, #16a34a, #4ade80, #86efac, transparent);
+        height: 3px;
+    }
+
+    input[type="range"] {
+        width: 100%;
+        height: 6px;
+        border-radius: 9999px;
+        appearance: none;
+        cursor: pointer;
+        background: linear-gradient(to right, #16a34a var(--val, 50%), #bbf7d0 var(--val, 50%));
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+        appearance: none;
+        width: 18px;
+        height: 18px;
+        border-radius: 9999px;
+        background: #16a34a;
+        border: 3px solid #fff;
+        box-shadow: 0 0 10px rgba(22, 163, 74, 0.55);
+    }
+}
+
+@layer utilities {
+    .text-gradient {
+        background-image: linear-gradient(135deg, #15803d, #4ade80);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+    }
+}

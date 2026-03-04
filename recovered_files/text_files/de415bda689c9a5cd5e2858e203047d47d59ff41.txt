@@ -1,0 +1,5 @@
+metadata.parquet columns: ['object_id', 'class_id', 'description', 'interpolation_mode', 'pcl_type', 'conversion_index', 'dimension_index', 'dimension_text', 'lifetime', 'resolution', 'data_group_id', 'file', 'time', 'building', 'device_class', 'device', 'channel', 'zone', 'room', 'floor', 'bde_recorder', 'bde_object_id', 'bde_channel_typ', 'bde_duration', 'bde_resolution', 'bde_group', 'bim_building_name', 'bim_building_part', 'bim_room_category', 'bim_room_area', 'bim_energy_category', 'bim_room_description', 'bim_floor', '__index_level_0__']
+
+Total sensor files: 37011
+First sensor file (RBHU-2025-01\RBHU\B106\B106WS01.AM50.parquet) columns: ['time', 'data', '__index_level_0__']
+Second sensor file (RBHU-2025-01\RBHU\B106\B106WS01.AM51.parquet) columns: ['time', 'data', '__index_level_0__']
