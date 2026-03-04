@@ -1,13 +1,15 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 from app.schemas.predict import WhatIfRequest, WhatIfResponse
 from app.services import ml as ml_service
 from app.services.data import get_peak_and_total
+from app.services.auth import get_current_user
+from app.models.user import User
 
 router = APIRouter(prefix="/whatif", tags=["What-If Analysis"])
 
 
 @router.post("", response_model=WhatIfResponse)
-def whatif(req: WhatIfRequest):
+def whatif(req: WhatIfRequest, _: User = Depends(get_current_user)):
     """
     Simulate the effect of temperature and occupancy changes on energy
     consumption. Returns both the unchanged baseline forecast and a

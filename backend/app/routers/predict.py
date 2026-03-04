@@ -1,14 +1,15 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 from app.schemas.predict import PredictRequest, PredictResponse, BatchPredictRequest, BatchPredictResponse
 from app.services import ml as ml_service
-from app.services.data import get_building_history
+from app.services.auth import get_current_user
+from app.models.user import User
 from datetime import datetime
 
 router = APIRouter(prefix="/predict", tags=["Forecast"])
 
 
 @router.post("", response_model=PredictResponse)
-def predict(req: PredictRequest):
+def predict(req: PredictRequest, _: User = Depends(get_current_user)):
     """
     Return an hourly energy-consumption forecast for the requested building.
     Results include confidence intervals and optionally incorporate

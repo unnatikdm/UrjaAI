@@ -1,12 +1,14 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 from app.schemas.predict import ExplainRequest, ExplainResponse
 from app.services import ml as ml_service
+from app.services.auth import get_current_user
+from app.models.user import User
 
 router = APIRouter(prefix="/explain", tags=["Explainability"])
 
 
 @router.post("", response_model=ExplainResponse)
-def explain(req: ExplainRequest):
+def explain(req: ExplainRequest, _: User = Depends(get_current_user)):
     """
     Return a plain-English explanation and SHAP-style feature contribution
     breakdown for the most recent forecast of the requested building.

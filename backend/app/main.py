@@ -11,7 +11,7 @@ from app.routers import auth as auth_router
 from app.routers import ingest as ingest_router
 from app.services.scheduler import create_scheduler
 
-# Register models with Base so create_all works
+# Import models so SQLAlchemy registers them with Base
 import app.models.user    # noqa
 import app.models.reading  # noqa
 
@@ -20,13 +20,18 @@ load_dotenv()
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Startup: create DB tables + start scheduler
+    # ── Startup ──────────────────────────────────────────────────────────────
+    # Create database tables
     Base.metadata.create_all(bind=engine)
+
+    # Start sensor data scheduler
     scheduler = create_scheduler()
     scheduler.start()
     print("[Urja AI] DB ready. Scheduler started — ingesting every 15 min.")
-    yield
-    # Shutdown
+
+    yield  # app runs here
+
+    # ── Shutdown ─────────────────────────────────────────────────────────────
     scheduler.shutdown(wait=False)
     print("[Urja AI] Scheduler stopped.")
 
@@ -34,15 +39,17 @@ async def lifespan(app: FastAPI):
 app = FastAPI(
     title="Urja AI — Campus Energy Optimization API",
     description=(
-        "Backend API for campus energy optimization. "
-        "Authenticate via POST /auth/login, then include "
-        "'Authorization: Bearer <token>' on all other requests."
+        "Backend API for the campus energy consumption prediction and "
+        "optimization system. Authenticate via POST /auth/login to get a JWT, "
+        "then include it as 'Authorization: Bearer <token>' on all other requests."
     ),
     version="2.0.0",
     lifespan=lifespan,
 )
 
-# ── CORS ──────────────────────────────────────────────────────────────────────
+# ─────────────────────────────────────────────────────────────────────────────
+# CORS
+# ─────────────────────────────────────────────────────────────────────────────
 allowed_origins = os.getenv("ALLOWED_ORIGINS", "*").split(",")
 
 app.add_middleware(
@@ -53,7 +60,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# ── Routers ───────────────────────────────────────────────────────────────────
+# ─────────────────────────────────────────────────────────────────────────────
+# Routers
+# ─────────────────────────────────────────────────────────────────────────────
 app.include_router(auth_router.router)
 app.include_router(predict.router)
 app.include_router(recommendations.router)

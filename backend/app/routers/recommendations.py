@@ -1,10 +1,12 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 from app.schemas.predict import (
     RecommendationsRequest,
     RecommendationsResponse,
     Recommendation,
 )
 from app.services.data import get_building_history, get_peak_and_total
+from app.services.auth import get_current_user
+from app.models.user import User
 from datetime import datetime
 
 router = APIRouter(prefix="/recommendations", tags=["Recommendations"])
@@ -87,7 +89,7 @@ def _rule_based_recommendations(building_id: str) -> list[Recommendation]:
 
 
 @router.post("", response_model=RecommendationsResponse)
-def recommendations(req: RecommendationsRequest):
+def recommendations(req: RecommendationsRequest, _: User = Depends(get_current_user)):
     """
     Return load-shifting and efficiency recommendations for a building.
     These are generated from rule-based business logic — no ML required.
