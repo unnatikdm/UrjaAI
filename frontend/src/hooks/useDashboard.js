@@ -28,9 +28,30 @@ export function useDashboard() {
 
     const debounceTimer = useRef(null)
 
-    // Load buildings list once
+    // Sustainability State
+    const [weather, setWeather] = useState(null)
+    const [alerts, setAlerts] = useState(null)
+    const [badges, setBadges] = useState(null)
+    const [stats, setStats] = useState(null)
+    const [carbonImpact, setCarbonImpact] = useState(null)
+
+    // Load buildings list and static sustainability data once
     useEffect(() => {
         getBuildings().then(setBuildings).catch(console.error)
+
+        // Fetch static sustainability data
+        Promise.all([
+            import('../services/api').then(m => m.getWeather()),
+            import('../services/api').then(m => m.getWeatherAlerts()),
+            import('../services/api').then(m => m.getBadges()),
+            import('../services/api').then(m => m.getStats())
+        ]).then(([w, a, b, s]) => {
+            setWeather(w)
+            setAlerts(a)
+            setBadges(b)
+            setStats(s)
+        }).catch(err => console.error("Could not load sustainability data:", err))
+
     }, [])
 
     // Load main data whenever selected building changes
@@ -48,6 +69,15 @@ export function useDashboard() {
                 setRecommendations(recs)
                 setExplanation(exp)
                 setWhatIfResult(null) // reset what-if on building change
+
+                // Calculate baseline carbon impact based on recommendations
+                if (recs && recs.recommendations) {
+                    const savedKwh = recs.recommendations.reduce((s, r) => s + r.savings_kwh, 0);
+                    const { postCarbonImpact } = await import('../services/api');
+                    const impact = await postCarbonImpact(savedKwh);
+                    setCarbonImpact(impact);
+                }
+
             } catch (e) {
                 setError(e.message || 'Failed to load data')
             } finally {
@@ -71,6 +101,14 @@ export function useDashboard() {
                     ])
                     setWhatIfResult(result)
                     setRecommendations(recs)
+
+                    // Update carbon impact based on new recommendations
+                    if (recs && recs.recommendations) {
+                        const savedKwh = recs.recommendations.reduce((s, r) => s + r.savings_kwh, 0);
+                        const { postCarbonImpact } = await import('../services/api');
+                        const impact = await postCarbonImpact(savedKwh);
+                        setCarbonImpact(impact);
+                    }
                 } catch (e) {
                     console.error('What-if fetch failed', e)
                 }
@@ -104,5 +142,10 @@ export function useDashboard() {
         metrics,
         loading,
         error,
+        weather,
+        alerts,
+        badges,
+        stats,
+        carbonImpact
     }
 }

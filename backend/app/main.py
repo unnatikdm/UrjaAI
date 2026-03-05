@@ -10,6 +10,7 @@ from app.routers import predict, recommendations, explain, whatif
 from app.routers import auth as auth_router
 from app.routers import ingest as ingest_router
 from app.services.scheduler import create_scheduler
+from app.routers import sustainability
 
 # Import models so SQLAlchemy registers them with Base
 import app.models.user    # noqa
@@ -69,6 +70,7 @@ app.include_router(recommendations.router)
 app.include_router(explain.router)
 app.include_router(whatif.router)
 app.include_router(ingest_router.router)
+app.include_router(sustainability.router)
 
 
 @app.get("/", tags=["Health"])

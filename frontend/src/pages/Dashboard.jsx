@@ -4,6 +4,7 @@ import ForecastChart from '../components/ForecastChart'
 import RecommendationsPanel from '../components/RecommendationsPanel'
 import ExplainabilitySection from '../components/ExplainabilitySection'
 import WhatIfControls from '../components/WhatIfControls'
+import SustainabilityPanel from '../components/SustainabilityPanel'
 import { useDashboard } from '../hooks/useDashboard'
 
 export default function Dashboard() {
@@ -20,6 +21,11 @@ export default function Dashboard() {
         metrics,
         loading,
         error,
+        weather,
+        alerts,
+        badges,
+        stats,
+        carbonImpact
     } = useDashboard()
 
     return (
@@ -51,7 +57,17 @@ export default function Dashboard() {
                     {/* Left column — chart + explainability */}
                     <div className="xl:col-span-2 space-y-6">
                         <ForecastChart forecast={forecast} whatIfResult={whatIfResult} />
-                        <ExplainabilitySection explanation={explanation} />
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <ExplainabilitySection explanation={explanation} />
+                            <SustainabilityPanel
+                                weather={weather}
+                                alerts={alerts}
+                                badges={badges}
+                                stats={stats}
+                                carbonImpact={carbonImpact}
+                            />
+                        </div>
                     </div>
 
                     {/* Right column — recommendations + what-if */}

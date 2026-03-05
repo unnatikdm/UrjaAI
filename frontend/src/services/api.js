@@ -77,3 +77,32 @@ export async function postWhatIf(buildingId, changes) {
     })
     return data
 }
+
+// ── Sustainability Endpoints ──────────────────────────────────────────────
+
+export async function getWeather(hours = 48) {
+    const { data } = await client.get(`/weather?hours=${hours}`)
+    return data
+}
+
+export async function getWeatherAlerts() {
+    const { data } = await client.get('/weather-alerts')
+    return data.alerts || []
+}
+
+export async function getBadges() {
+    const { data } = await client.get('/badges')
+    return data
+}
+
+export async function getStats() {
+    const { data } = await client.get('/stats')
+    return data
+}
+
+export async function postCarbonImpact(energySaved) {
+    const { data } = await client.post('/carbon-impact', {
+        energy_saved_kwh: energySaved
+    })
+    return data
+}
