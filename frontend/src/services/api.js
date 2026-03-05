@@ -12,7 +12,7 @@ const USE_MOCK = !import.meta.env.VITE_API_BASE_URL
 
 const client = axios.create({
     baseURL: import.meta.env.VITE_API_BASE_URL || '',
-    timeout: 10000,
+    timeout: 30000, // Increased to 30s to allow ML models to run inference
 })
 
 // ── Request interceptor: attach JWT ──────────────────────────────────────────
@@ -52,9 +52,14 @@ export async function getForecast(buildingId, horizon = 24, whatIfModifiers = nu
     return data
 }
 
-export async function getRecommendations(buildingId) {
+export async function getRecommendations(buildingId, whatIfModifiers = null) {
     if (USE_MOCK) return MOCK_RECOMMENDATIONS
-    const { data } = await client.post('/recommendations', { building_id: buildingId })
+    const payload = { building_id: buildingId }
+    if (whatIfModifiers) {
+        if (whatIfModifiers.temperature_offset !== undefined) payload.temperature_offset = whatIfModifiers.temperature_offset
+        if (whatIfModifiers.occupancy_multiplier !== undefined) payload.occupancy_multiplier = whatIfModifiers.occupancy_multiplier
+    }
+    const { data } = await client.post('/recommendations', payload)
     return data
 }
 

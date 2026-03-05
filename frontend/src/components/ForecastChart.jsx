@@ -4,7 +4,11 @@ import {
 } from 'recharts'
 
 function formatHour(ts) {
-    return new Date(ts).toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: false })
+    // Backend may send "2025-07-31T23:00:00+00:00Z" — strip trailing Z if offset exists
+    const cleaned = typeof ts === 'string' ? ts.replace(/([+-]\d{2}:\d{2})Z$/, '$1') : ts
+    const d = new Date(cleaned)
+    if (isNaN(d)) return ts  // fallback: show raw string
+    return d.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: false })
 }
 
 function CustomTooltip({ active, payload, label }) {

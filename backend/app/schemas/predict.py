@@ -37,6 +37,8 @@ class PredictResponse(BaseModel):
 
 class RecommendationsRequest(BaseModel):
     building_id: str
+    temperature_offset: Optional[float] = 0.0    # from what-if slider
+    occupancy_multiplier: Optional[float] = 1.0  # from what-if slider
 
 
 class Recommendation(BaseModel):

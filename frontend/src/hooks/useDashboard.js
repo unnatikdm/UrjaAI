@@ -41,7 +41,7 @@ export function useDashboard() {
             try {
                 const [fc, recs, exp] = await Promise.all([
                     getForecast(selectedBuilding),
-                    getRecommendations(selectedBuilding),
+                    getRecommendations(selectedBuilding, whatIfState),
                     getExplanation(selectedBuilding),
                 ])
                 setForecast(fc)
@@ -65,8 +65,12 @@ export function useDashboard() {
             if (debounceTimer.current) clearTimeout(debounceTimer.current)
             debounceTimer.current = setTimeout(async () => {
                 try {
-                    const result = await postWhatIf(selectedBuilding, next)
+                    const [result, recs] = await Promise.all([
+                        postWhatIf(selectedBuilding, next),
+                        getRecommendations(selectedBuilding, next)
+                    ])
                     setWhatIfResult(result)
+                    setRecommendations(recs)
                 } catch (e) {
                     console.error('What-if fetch failed', e)
                 }
