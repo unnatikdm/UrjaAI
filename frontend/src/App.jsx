@@ -1,5 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import Dashboard from './pages/Dashboard'
+import SpecialFeatures from './pages/SpecialFeatures'
+import DeepRecommendations from './pages/DeepRecommendations'
 import Login from './pages/Login'
 import ProtectedRoute from './components/ProtectedRoute'
 
@@ -13,6 +15,22 @@ export default function App() {
                     element={
                         <ProtectedRoute>
                             <Dashboard />
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path="/special-features"
+                    element={
+                        <ProtectedRoute>
+                            <SpecialFeatures />
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path="/deep-recommendations/:buildingId"
+                    element={
+                        <ProtectedRoute>
+                            <DeepRecommendations />
                         </ProtectedRoute>
                     }
                 />

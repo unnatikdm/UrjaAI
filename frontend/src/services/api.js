@@ -12,7 +12,7 @@ const USE_MOCK = !import.meta.env.VITE_API_BASE_URL
 
 const client = axios.create({
     baseURL: import.meta.env.VITE_API_BASE_URL || '',
-    timeout: 30000, // Increased to 30s to allow ML models to run inference
+    timeout: 60000, // Increased to 120s to allow ML models to run inference
 })
 
 // ── Request interceptor: attach JWT ──────────────────────────────────────────
@@ -103,6 +103,27 @@ export async function getStats() {
 export async function postCarbonImpact(energySaved) {
     const { data } = await client.post('/carbon-impact', {
         energy_saved_kwh: energySaved
+    })
+    return data
+}
+
+// ── RAG Deep Analysis Endpoints ───────────────────────────────────────────
+
+export async function getDeepRecommendations(buildingId, modifiers = null) {
+    const payload = { building_id: buildingId }
+    if (modifiers) {
+        payload.temperature_offset = modifiers.temperature_offset || 0.0
+        payload.occupancy_multiplier = modifiers.occupancy_multiplier || 1.0
+    }
+    const { data } = await client.post('/rag/deep-recommendations', payload)
+    return data
+}
+
+export async function chatWithRecommendationAI(recommendation, message, chatHistory = []) {
+    const { data } = await client.post('/rag/chat', {
+        recommendation,
+        message,
+        chat_history: chatHistory
     })
     return data
 }

@@ -37,8 +37,13 @@ def _smart_recommendations(
     # ── Current conditions ────────────────────────────────────────────────
     now = datetime.utcnow()
     current_hour = now.hour
-    recent_occupancy = float(df["occupancy"].tail(3).mean())
-    recent_temp = float(df["temperature_c"].tail(3).mean())
+    
+    if len(df) > 0:
+        recent_occupancy = float(df["occupancy"].tail(3).mean())
+        recent_temp = float(df["temperature_c"].tail(3).mean())
+    else:
+        recent_occupancy = 0.5
+        recent_temp = 25.0
 
     # ── Weather data ──────────────────────────────────────────────────────
     try:

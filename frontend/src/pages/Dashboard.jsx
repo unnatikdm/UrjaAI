@@ -73,7 +73,7 @@ export default function Dashboard() {
                     {/* Right column — recommendations + what-if */}
                     <div className="space-y-6">
                         <WhatIfControls whatIfState={whatIfState} onWhatIfChange={handleWhatIfChange} />
-                        <RecommendationsPanel recommendations={recommendations} />
+                        <RecommendationsPanel recommendations={recommendations} buildingId={selectedBuilding} />
                     </div>
                 </div>
             </main>

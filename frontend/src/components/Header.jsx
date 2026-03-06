@@ -32,23 +32,42 @@ export default function Header({ buildings, selectedBuilding, onBuildingChange }
                     </div>
                 </div>
 
-                {/* Building selector */}
-                <div className="flex items-center gap-3">
-                    <label htmlFor="building-select" className="text-xs text-green-200 whitespace-nowrap hidden sm:block font-medium">
-                        Building
-                    </label>
-                    <select
-                        id="building-select"
-                        value={selectedBuilding}
-                        onChange={e => onBuildingChange(e.target.value)}
-                        className="bg-white/15 border border-white/30 text-white text-sm rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-white/40 transition-all cursor-pointer backdrop-blur-sm"
-                    >
-                        {buildings.map(b => (
-                            <option key={b} value={b} style={{ color: '#1a2e1e', background: '#fff' }}>
-                                {b.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase())}
-                            </option>
-                        ))}
-                    </select>
+                {/* Navigation + Building selector */}
+                <div className="flex items-center gap-4">
+                    {/* Nav Links */}
+                    <div className="flex items-center gap-2">
+                        <button
+                            onClick={() => navigate('/')}
+                            className="text-sm text-green-100 hover:text-white px-3 py-1.5 rounded-lg hover:bg-white/10 transition-all"
+                        >
+                            📊 Dashboard
+                        </button>
+                        <button
+                            onClick={() => navigate('/special-features')}
+                            className="text-sm text-green-100 hover:text-white px-3 py-1.5 rounded-lg hover:bg-white/10 transition-all"
+                        >
+                            🎉 Special Features
+                        </button>
+                    </div>
+
+                    {/* Building selector */}
+                    <div className="flex items-center gap-3">
+                        <label htmlFor="building-select" className="text-xs text-green-200 whitespace-nowrap hidden sm:block font-medium">
+                            Building
+                        </label>
+                        <select
+                            id="building-select"
+                            value={selectedBuilding}
+                            onChange={e => onBuildingChange(e.target.value)}
+                            className="bg-white/15 border border-white/30 text-white text-sm rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-white/40 transition-all cursor-pointer backdrop-blur-sm"
+                        >
+                            {buildings.map(b => (
+                                <option key={b} value={b} style={{ color: '#1a2e1e', background: '#fff' }}>
+                                    {b.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase())}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
                 </div>
 
                 {/* Date-time + logout */}

@@ -1,0 +1,119 @@
+[
+  {
+    "type": "weather_pattern",
+    "condition": "heatwave",
+    "impact": "Heatwave detected with 14 consecutive hours above 30\u00b0C. This typically increases cooling load by 25-35% compared to normal conditions.",
+    "building_id": "A",
+    "date_range": "2025-01-01 to 2025-07-20",
+    "temperature_range": "-13.2-37.6\u00b0C",
+    "metadata": {
+      "source": "open-meteo",
+      "extraction_date": "2026-03-06T12:26:16.429392",
+      "confidence": 0.9
+    }
+  },
+  {
+    "type": "weather_pattern",
+    "condition": "cold_snap",
+    "impact": "Cold snap detected with 313 consecutive hours below 5\u00b0C. This typically increases heating load by 20-30% compared to normal conditions.",
+    "building_id": "A",
+    "date_range": "2025-01-01 to 2025-07-20",
+    "temperature_range": "-13.2-37.6\u00b0C",
+    "metadata": {
+      "source": "open-meteo",
+      "extraction_date": "2026-03-06T12:26:16.429402",
+      "confidence": 0.9
+    }
+  },
+  {
+    "type": "weather_pattern",
+    "condition": "high_humidity",
+    "impact": "High humidity conditions (avg 70.2%) increase perceived temperature and HVAC load by 10-15%.",
+    "building_id": "A",
+    "date_range": "2025-01-01 to 2025-07-20",
+    "temperature_range": null,
+    "metadata": {
+      "source": "open-meteo",
+      "extraction_date": "2026-03-06T12:26:16.429407",
+      "confidence": 0.8
+    }
+  },
+  {
+    "type": "weather_pattern",
+    "condition": "heatwave",
+    "impact": "Heatwave detected with 14 consecutive hours above 30\u00b0C. This typically increases cooling load by 25-35% compared to normal conditions.",
+    "building_id": "B",
+    "date_range": "2025-01-01 to 2025-07-20",
+    "temperature_range": "-13.2-37.6\u00b0C",
+    "metadata": {
+      "source": "open-meteo",
+      "extraction_date": "2026-03-06T12:26:16.429494",
+      "confidence": 0.9
+    }
+  },
+  {
+    "type": "weather_pattern",
+    "condition": "cold_snap",
+    "impact": "Cold snap detected with 313 consecutive hours below 5\u00b0C. This typically increases heating load by 20-30% compared to normal conditions.",
+    "building_id": "B",
+    "date_range": "2025-01-01 to 2025-07-20",
+    "temperature_range": "-13.2-37.6\u00b0C",
+    "metadata": {
+      "source": "open-meteo",
+      "extraction_date": "2026-03-06T12:26:16.429498",
+      "confidence": 0.9
+    }
+  },
+  {
+    "type": "weather_pattern",
+    "condition": "high_humidity",
+    "impact": "High humidity conditions (avg 70.2%) increase perceived temperature and HVAC load by 10-15%.",
+    "building_id": "B",
+    "date_range": "2025-01-01 to 2025-07-20",
+    "temperature_range": null,
+    "metadata": {
+      "source": "open-meteo",
+      "extraction_date": "2026-03-06T12:26:16.429502",
+      "confidence": 0.8
+    }
+  },
+  {
+    "type": "weather_pattern",
+    "condition": "heatwave",
+    "impact": "Heatwave detected with 14 consecutive hours above 30\u00b0C. This typically increases cooling load by 25-35% compared to normal conditions.",
+    "building_id": "C",
+    "date_range": "2025-01-01 to 2025-07-20",
+    "temperature_range": "-13.2-37.6\u00b0C",
+    "metadata": {
+      "source": "open-meteo",
+      "extraction_date": "2026-03-06T12:26:16.429545",
+      "confidence": 0.9
+    }
+  },
+  {
+    "type": "weather_pattern",
+    "condition": "cold_snap",
+    "impact": "Cold snap detected with 313 consecutive hours below 5\u00b0C. This typically increases heating load by 20-30% compared to normal conditions.",
+    "building_id": "C",
+    "date_range": "2025-01-01 to 2025-07-20",
+    "temperature_range": "-13.2-37.6\u00b0C",
+    "metadata": {
+      "source": "open-meteo",
+      "extraction_date": "2026-03-06T12:26:16.429549",
+      "confidence": 0.9
+    }
+  },
+  {
+    "type": "weather_pattern",
+    "condition": "high_humidity",
+    "impact": "High humidity conditions (avg 70.2%) increase perceived temperature and HVAC load by 10-15%.",
+    "building_id": "C",
+    "date_range": "2025-01-01 to 2025-07-20",
+    "temperature_range": null,
+    "metadata": {
+      "source": "open-meteo",
+      "extraction_date": "2026-03-06T12:26:16.429552",
+      "confidence": 0.8
+    }
+  }
+]

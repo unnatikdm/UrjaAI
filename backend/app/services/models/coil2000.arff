@@ -1,0 +1,448 @@
+<oml:run xmlns:oml="http://openml.org/openml">
+  <oml:run_id>0</oml:run_id>
+  <oml:uploader>0</oml:uploader>
+  <oml:task_id>3749</oml:task_id>
+  <oml:flow_id>4006</oml:flow_id>
+  <oml:setup_string>weka.classifiers.functions.LibSVM -- -S 0 -K 2 -D 3 -G 0.0 -R 0.0 -N 0.5 -M 40.0 -C 1.0 -E 0.001 -P 0.1 -model D:\Weka-3-7 -seed 1</oml:setup_string>
+  <oml:parameter_setting>
+    <oml:name>C</oml:name>
+    <oml:value>1.0</oml:value>
+    <oml:component>4006</oml:component>
+  </oml:parameter_setting>
+  <oml:parameter_setting>
+    <oml:name>D</oml:name>
+    <oml:value>3</oml:value>
+    <oml:component>4006</oml:component>
+  </oml:parameter_setting>
+  <oml:parameter_setting>
+    <oml:name>E</oml:name>
+    <oml:value>0.001</oml:value>
+    <oml:component>4006</oml:component>
+  </oml:parameter_setting>
+  <oml:parameter_setting>
+    <oml:name>G</oml:name>
+    <oml:value>0.0</oml:value>
+    <oml:component>4006</oml:component>
+  </oml:parameter_setting>
+  <oml:parameter_setting>
+    <oml:name>K</oml:name>
+    <oml:value>2</oml:value>
+    <oml:component>4006</oml:component>
+  </oml:parameter_setting>
+  <oml:parameter_setting>
+    <oml:name>M</oml:name>
+    <oml:value>40.0</oml:value>
+    <oml:component>4006</oml:component>
+  </oml:parameter_setting>
+  <oml:parameter_setting>
+    <oml:name>N</oml:name>
+    <oml:value>0.5</oml:value>
+    <oml:component>4006</oml:component>
+  </oml:parameter_setting>
+  <oml:parameter_setting>
+    <oml:name>P</oml:name>
+    <oml:value>0.1</oml:value>
+    <oml:component>4006</oml:component>
+  </oml:parameter_setting>
+  <oml:parameter_setting>
+    <oml:name>R</oml:name>
+    <oml:value>0.0</oml:value>
+    <oml:component>4006</oml:component>
+  </oml:parameter_setting>
+  <oml:parameter_setting>
+    <oml:name>S</oml:name>
+    <oml:value>0</oml:value>
+    <oml:component>4006</oml:component>
+  </oml:parameter_setting>
+  <oml:parameter_setting>
+    <oml:name>model</oml:name>
+    <oml:value>D:\Weka-3-7</oml:value>
+    <oml:component>4006</oml:component>
+  </oml:parameter_setting>
+  <oml:parameter_setting>
+    <oml:name>seed</oml:name>
+    <oml:value>1</oml:value>
+    <oml:component>4006</oml:component>
+  </oml:parameter_setting>
+  <oml:tag>weka</oml:tag>
+  <oml:tag>weka_3.7.13</oml:tag>
+  <oml:input_data/>
+  <oml:output_data>
+    <oml:evaluation repeat="0" fold="0">
+      <oml:name>root_relative_squared_error</oml:name>
+      <oml:flow>openml.evaluation.root_relative_squared_error(1.0)</oml:flow>
+      <oml:value>1.264911</oml:value>
+    </oml:evaluation>
+    <oml:evaluation repeat="0" fold="0">
+      <oml:name>usercpu_time_millis_testing</oml:name>
+      <oml:flow>openml.evaluation.usercpu_time_millis_testing(1.0)</oml:flow>
+      <oml:value>15.625</oml:value>
+    </oml:evaluation>
+    <oml:evaluation repeat="0" fold="0">
+      <oml:name>root_mean_squared_error</oml:name>
+      <oml:flow>openml.evaluation.root_mean_squared_error(1.0)</oml:flow>
+      <oml:value>0.632456</oml:value>
+    </oml:evaluation>
+    <oml:evaluation repeat="0" fold="0">
+      <oml:name>usercpu_time_millis_training</oml:name>
+      <oml:flow>openml.evaluation.usercpu_time_millis_training(1.0)</oml:flow>
+      <oml:value>46.875</oml:value>
+    </oml:evaluation>
+    <oml:evaluation repeat="0" fold="0">
+      <oml:name>predictive_accuracy</oml:name>
+      <oml:flow>openml.evaluation.predictive_accuracy(1.0)</oml:flow>
+      <oml:value>0.6</oml:value>
+    </oml:evaluation>
+    <oml:evaluation repeat="0" fold="0">
+      <oml:name>usercpu_time_millis</oml:name>
+      <oml:flow>openml.evaluation.usercpu_time_millis(1.0)</oml:flow>
+      <oml:value>62.5</oml:value>
+    </oml:evaluation>
+    <oml:evaluation repeat="0" fold="0">
+      <oml:name>kappa</oml:name>
+      <oml:flow>openml.evaluation.kappa(1.0)</oml:flow>
+      <oml:value>0.180328</oml:value>
+    </oml:evaluation>
+    <oml:evaluation repeat="0" fold="1">
+      <oml:name>root_relative_squared_error</oml:name>
+      <oml:flow>openml.evaluation.root_relative_squared_error(1.0)</oml:flow>
+      <oml:value>1.13136</oml:value>
+    </oml:evaluation>
+    <oml:evaluation repeat="0" fold="1">
+      <oml:name>usercpu_time_millis_testing</oml:name>
+      <oml:flow>openml.evaluation.usercpu_time_millis_testing(1.0)</oml:flow>
+      <oml:value>0</oml:value>
+    </oml:evaluation>
+    <oml:evaluation repeat="0" fold="1">
+      <oml:name>root_mean_squared_error</oml:name>
+      <oml:flow>openml.evaluation.root_mean_squared_error(1.0)</oml:flow>
+      <oml:value>0.565685</oml:value>
+    </oml:evaluation>
+    <oml:evaluation repeat="0" fold="1">
+      <oml:name>usercpu_time_millis_training</oml:name>
+      <oml:flow>openml.evaluation.usercpu_time_millis_training(1.0)</oml:flow>
+      <oml:value>46.875</oml:value>
+    </oml:evaluation>
+    <oml:evaluation repeat="0" fold="1">
+      <oml:name>predictive_accuracy</oml:name>
+      <oml:flow>openml.evaluation.predictive_accuracy(1.0)</oml:flow>
+      <oml:value>0.68</oml:value>
+    </oml:evaluation>
+    <oml:evaluation repeat="0" fold="1">
+      <oml:name>usercpu_time_millis</oml:name>
+      <oml:flow>openml.evaluation.usercpu_time_millis(1.0)</oml:flow>
+      <oml:value>46.875</oml:value>
+    </oml:evaluation>
+    <oml:evaluation repeat="0" fold="1">
+      <oml:name>kappa</oml:name>
+      <oml:flow>openml.evaluation.kappa(1.0)</oml:flow>
+      <oml:value>0.36</oml:value>
+    </oml:evaluation>
+    <oml:evaluation repeat="0" fold="2">
+      <oml:name>root_relative_squared_error</oml:name>
+      <oml:flow>openml.evaluation.root_relative_squared_error(1.0)</oml:flow>
+      <oml:value>1.232871</oml:value>
+    </oml:evaluation>
+    <oml:evaluation repeat="0" fold="2">
+      <oml:name>usercpu_time_millis_testing</oml:name>
+      <oml:flow>openml.evaluation.usercpu_time_millis_testing(1.0)</oml:flow>
+      <oml:value>15.625</oml:value>
+    </oml:evaluation>
+    <oml:evaluation repeat="0" fold="2">
+      <oml:name>root_mean_squared_error</oml:name>
+      <oml:flow>openml.evaluation.root_mean_squared_error(1.0)</oml:flow>
+      <oml:value>0.616441</oml:value>
+    </oml:evaluation>
+    <oml:evaluation repeat="0" fold="2">
+      <oml:name>usercpu_time_millis_training</oml:name>
+      <oml:flow>openml.evaluation.usercpu_time_millis_training(1.0)</oml:flow>
+      <oml:value>46.875</oml:value>
+    </oml:evaluation>
+    <oml:evaluation repeat="0" fold="2">
+      <oml:name>predictive_accuracy</oml:name>
+      <oml:flow>openml.evaluation.predictive_accuracy(1.0)</oml:flow>
+      <oml:value>0.62</oml:value>
+    </oml:evaluation>
+    <oml:evaluation repeat="0" fold="2">
+      <oml:name>usercpu_time_millis</oml:name>
+      <oml:flow>openml.evaluation.usercpu_time_millis(1.0)</oml:flow>
+      <oml:value>62.5</oml:value>
+    </oml:evaluation>
+    <oml:evaluation repeat="0" fold="2">
+      <oml:name>kappa</oml:name>
+      <oml:flow>openml.evaluation.kappa(1.0)</oml:flow>
+      <oml:value>0.24</oml:value>
+    </oml:evaluation>
+    <oml:evaluation repeat="0" fold="3">
+      <oml:name>root_relative_squared_error</oml:name>
+      <oml:flow>openml.evaluation.root_relative_squared_error(1.0)</oml:flow>
+      <oml:value>1.326637</oml:value>
+    </oml:evaluation>
+    <oml:evaluation repeat="0" fold="3">
+      <oml:name>usercpu_time_millis_testing</oml:name>
+      <oml:flow>openml.evaluation.usercpu_time_millis_testing(1.0)</oml:flow>
+      <oml:value>0</oml:value>
+    </oml:evaluation>
+    <oml:evaluation repeat="0" fold="3">
+      <oml:name>root_mean_squared_error</oml:name>
+      <oml:flow>openml.evaluation.root_mean_squared_error(1.0)</oml:flow>
+      <oml:value>0.663325</oml:value>
+    </oml:evaluation>
+    <oml:evaluation repeat="0" fold="3">
+      <oml:name>usercpu_time_millis_training</oml:name>
+      <oml:flow>openml.evaluation.usercpu_time_millis_training(1.0)</oml:flow>
+      <oml:value>31.25</oml:value>
+    </oml:evaluation>
+    <oml:evaluation repeat="0" fold="3">
+      <oml:name>predictive_accuracy</oml:name>
+      <oml:flow>openml.evaluation.predictive_accuracy(1.0)</oml:flow>
+      <oml:value>0.56</oml:value>
+    </oml:evaluation>
+    <oml:evaluation repeat="0" fold="3">
+      <oml:name>usercpu_time_millis</oml:name>
+      <oml:flow>openml.evaluation.usercpu_time_millis(1.0)</oml:flow>
+      <oml:value>31.25</oml:value>
+    </oml:evaluation>
+    <oml:evaluation repeat="0" fold="3">
+      <oml:name>kappa</oml:name>
+      <oml:flow>openml.evaluation.kappa(1.0)</oml:flow>
+      <oml:value>0.12</oml:value>
+    </oml:evaluation>
+    <oml:evaluation repeat="0" fold="4">
+      <oml:name>root_relative_squared_error</oml:name>
+      <oml:flow>openml.evaluation.root_relative_squared_error(1.0)</oml:flow>
+      <oml:value>1.4142</oml:value>
+    </oml:evaluation>
+    <oml:evaluation repeat="0" fold="4">
+      <oml:name>usercpu_time_millis_testing</oml:name>
+      <oml:flow>openml.evaluation.usercpu_time_millis_testing(1.0)</oml:flow>
+      <oml:value>0</oml:value>
+    </oml:evaluation>
+    <oml:evaluation repeat="0" fold="4">
+      <oml:name>root_mean_squared_error</oml:name>
+      <oml:flow>openml.evaluation.root_mean_squared_error(1.0)</oml:flow>
+      <oml:value>0.707107</oml:value>
+    </oml:evaluation>
+    <oml:evaluation repeat="0" fold="4">
+      <oml:name>usercpu_time_millis_training</oml:name>
+      <oml:flow>openml.evaluation.usercpu_time_millis_training(1.0)</oml:flow>
+      <oml:value>46.875</oml:value>
+    </oml:evaluation>
+    <oml:evaluation repeat="0" fold="4">
+      <oml:name>predictive_accuracy</oml:name>
+      <oml:flow>openml.evaluation.predictive_accuracy(1.0)</oml:flow>
+      <oml:value>0.5</oml:value>
+    </oml:evaluation>
+    <oml:evaluation repeat="0" fold="4">
+      <oml:name>usercpu_time_millis</oml:name>
+      <oml:flow>openml.evaluation.usercpu_time_millis(1.0)</oml:flow>
+      <oml:value>46.875</oml:value>
+    </oml:evaluation>
+    <oml:evaluation repeat="0" fold="4">
+      <oml:name>kappa</oml:name>
+      <oml:flow>openml.evaluation.kappa(1.0)</oml:flow>
+      <oml:value>0</oml:value>
+    </oml:evaluation>
+    <oml:evaluation repeat="0" fold="5">
+      <oml:name>root_relative_squared_error</oml:name>
+      <oml:flow>openml.evaluation.root_relative_squared_error(1.0)</oml:flow>
+      <oml:value>1.385627</oml:value>
+    </oml:evaluation>
+    <oml:evaluation repeat="0" fold="5">
+      <oml:name>usercpu_time_millis_testing</oml:name>
+      <oml:flow>openml.evaluation.usercpu_time_millis_testing(1.0)</oml:flow>
+      <oml:value>0</oml:value>
+    </oml:evaluation>
+    <oml:evaluation repeat="0" fold="5">
+      <oml:name>root_mean_squared_error</oml:name>
+      <oml:flow>openml.evaluation.root_mean_squared_error(1.0)</oml:flow>
+      <oml:value>0.69282</oml:value>
+    </oml:evaluation>
+    <oml:evaluation repeat="0" fold="5">
+      <oml:name>usercpu_time_millis_training</oml:name>
+      <oml:flow>openml.evaluation.usercpu_time_millis_training(1.0)</oml:flow>
+      <oml:value>46.875</oml:value>
+    </oml:evaluation>
+    <oml:evaluation repeat="0" fold="5">
+      <oml:name>predictive_accuracy</oml:name>
+      <oml:flow>openml.evaluation.predictive_accuracy(1.0)</oml:flow>
+      <oml:value>0.52</oml:value>
+    </oml:evaluation>
+    <oml:evaluation repeat="0" fold="5">
+      <oml:name>usercpu_time_millis</oml:name>
+      <oml:flow>openml.evaluation.usercpu_time_millis(1.0)</oml:flow>
+      <oml:value>46.875</oml:value>
+    </oml:evaluation>
+    <oml:evaluation repeat="0" fold="5">
+      <oml:name>kappa</oml:name>
+      <oml:flow>openml.evaluation.kappa(1.0)</oml:flow>
+      <oml:value>0.04</oml:value>
+    </oml:evaluation>
+    <oml:evaluation repeat="0" fold="6">
+      <oml:name>root_relative_squared_error</oml:name>
+      <oml:flow>openml.evaluation.root_relative_squared_error(1.0)</oml:flow>
+      <oml:value>1.326637</oml:value>
+    </oml:evaluation>
+    <oml:evaluation repeat="0" fold="6">
+      <oml:name>usercpu_time_millis_testing</oml:name>
+      <oml:flow>openml.evaluation.usercpu_time_millis_testing(1.0)</oml:flow>
+      <oml:value>15.625</oml:value>
+    </oml:evaluation>
+    <oml:evaluation repeat="0" fold="6">
+      <oml:name>root_mean_squared_error</oml:name>
+      <oml:flow>openml.evaluation.root_mean_squared_error(1.0)</oml:flow>
+      <oml:value>0.663325</oml:value>
+    </oml:evaluation>
+    <oml:evaluation repeat="0" fold="6">
+      <oml:name>usercpu_time_millis_training</oml:name>
+      <oml:flow>openml.evaluation.usercpu_time_millis_training(1.0)</oml:flow>
+      <oml:value>31.25</oml:value>
+    </oml:evaluation>
+    <oml:evaluation repeat="0" fold="6">
+      <oml:name>predictive_accuracy</oml:name>
+      <oml:flow>openml.evaluation.predictive_accuracy(1.0)</oml:flow>
+      <oml:value>0.56</oml:value>
+    </oml:evaluation>
+    <oml:evaluation repeat="0" fold="6">
+      <oml:name>usercpu_time_millis</oml:name>
+      <oml:flow>openml.evaluation.usercpu_time_millis(1.0)</oml:flow>
+      <oml:value>46.875</oml:value>
+    </oml:evaluation>
+    <oml:evaluation repeat="0" fold="6">
+      <oml:name>kappa</oml:name>
+      <oml:flow>openml.evaluation.kappa(1.0)</oml:flow>
+      <oml:value>0.12</oml:value>
+    </oml:evaluation>
+    <oml:evaluation repeat="0" fold="7">
+      <oml:name>root_relative_squared_error</oml:name>
+      <oml:flow>openml.evaluation.root_relative_squared_error(1.0)</oml:flow>
+      <oml:value>1.166179</oml:value>
+    </oml:evaluation>
+    <oml:evaluation repeat="0" fold="7">
+      <oml:name>usercpu_time_millis_testing</oml:name>
+      <oml:flow>openml.evaluation.usercpu_time_millis_testing(1.0)</oml:flow>
+      <oml:value>0</oml:value>
+    </oml:evaluation>
+    <oml:evaluation repeat="0" fold="7">
+      <oml:name>root_mean_squared_error</oml:name>
+      <oml:flow>openml.evaluation.root_mean_squared_error(1.0)</oml:flow>
+      <oml:value>0.583095</oml:value>
+    </oml:evaluation>
+    <oml:evaluation repeat="0" fold="7">
+      <oml:name>usercpu_time_millis_training</oml:name>
+      <oml:flow>openml.evaluation.usercpu_time_millis_training(1.0)</oml:flow>
+      <oml:value>31.25</oml:value>
+    </oml:evaluation>
+    <oml:evaluation repeat="0" fold="7">
+      <oml:name>predictive_accuracy</oml:name>
+      <oml:flow>openml.evaluation.predictive_accuracy(1.0)</oml:flow>
+      <oml:value>0.66</oml:value>
+    </oml:evaluation>
+    <oml:evaluation repeat="0" fold="7">
+      <oml:name>usercpu_time_millis</oml:name>
+      <oml:flow>openml.evaluation.usercpu_time_millis(1.0)</oml:flow>
+      <oml:value>31.25</oml:value>
+    </oml:evaluation>
+    <oml:evaluation repeat="0" fold="7">
+      <oml:name>kappa</oml:name>
+      <oml:flow>openml.evaluation.kappa(1.0)</oml:flow>
+      <oml:value>0.32</oml:value>
+    </oml:evaluation>
+    <oml:evaluation repeat="0" fold="8">
+      <oml:name>root_relative_squared_error</oml:name>
+      <oml:flow>openml.evaluation.root_relative_squared_error(1.0)</oml:flow>
+      <oml:value>1.442206</oml:value>
+    </oml:evaluation>
+    <oml:evaluation repeat="0" fold="8">
+      <oml:name>usercpu_time_millis_testing</oml:name>
+      <oml:flow>openml.evaluation.usercpu_time_millis_testing(1.0)</oml:flow>
+      <oml:value>0</oml:value>
+    </oml:evaluation>
+    <oml:evaluation repeat="0" fold="8">
+      <oml:name>root_mean_squared_error</oml:name>
+      <oml:flow>openml.evaluation.root_mean_squared_error(1.0)</oml:flow>
+      <oml:value>0.72111</oml:value>
+    </oml:evaluation>
+    <oml:evaluation repeat="0" fold="8">
+      <oml:name>usercpu_time_millis_training</oml:name>
+      <oml:flow>openml.evaluation.usercpu_time_millis_training(1.0)</oml:flow>
+      <oml:value>31.25</oml:value>
+    </oml:evaluation>
+    <oml:evaluation repeat="0" fold="8">
+      <oml:name>predictive_accuracy</oml:name>
+      <oml:flow>openml.evaluation.predictive_accuracy(1.0)</oml:flow>
+      <oml:value>0.48</oml:value>
+    </oml:evaluation>
+    <oml:evaluation repeat="0" fold="8">
+      <oml:name>usercpu_time_millis</oml:name>
+      <oml:flow>openml.evaluation.usercpu_time_millis(1.0)</oml:flow>
+      <oml:value>31.25</oml:value>
+    </oml:evaluation>
+    <oml:evaluation repeat="0" fold="8">
+      <oml:name>kappa</oml:name>
+      <oml:flow>openml.evaluation.kappa(1.0)</oml:flow>
+      <oml:value>-0.04</oml:value>
+    </oml:evaluation>
+    <oml:evaluation repeat="0" fold="9">
+      <oml:name>root_relative_squared_error</oml:name>
+      <oml:flow>openml.evaluation.root_relative_squared_error(1.0)</oml:flow>
+      <oml:value>1.199988</oml:value>
+    </oml:evaluation>
+    <oml:evaluation repeat="0" fold="9">
+      <oml:name>usercpu_time_millis_testing</oml:name>
+      <oml:flow>openml.evaluation.usercpu_time_millis_testing(1.0)</oml:flow>
+      <oml:value>0</oml:value>
+    </oml:evaluation>
+    <oml:evaluation repeat="0" fold="9">
+      <oml:name>root_mean_squared_error</oml:name>
+      <oml:flow>openml.evaluation.root_mean_squared_error(1.0)</oml:flow>
+      <oml:value>0.6</oml:value>
+    </oml:evaluation>
+    <oml:evaluation repeat="0" fold="9">
+      <oml:name>usercpu_time_millis_training</oml:name>
+      <oml:flow>openml.evaluation.usercpu_time_millis_training(1.0)</oml:flow>
+      <oml:value>46.875</oml:value>
+    </oml:evaluation>
+    <oml:evaluation repeat="0" fold="9">
+      <oml:name>predictive_accuracy</oml:name>
+      <oml:flow>openml.evaluation.predictive_accuracy(1.0)</oml:flow>
+      <oml:value>0.64</oml:value>
+    </oml:evaluation>
+    <oml:evaluation repeat="0" fold="9">
+      <oml:name>usercpu_time_millis</oml:name>
+      <oml:flow>openml.evaluation.usercpu_time_millis(1.0)</oml:flow>
+      <oml:value>46.875</oml:value>
+    </oml:evaluation>
+    <oml:evaluation repeat="0" fold="9">
+      <oml:name>kappa</oml:name>
+      <oml:flow>openml.evaluation.kappa(1.0)</oml:flow>
+      <oml:value>0.28</oml:value>
+    </oml:evaluation>
+    <oml:evaluation>
+      <oml:name>usercpu_time_millis_testing</oml:name>
+      <oml:flow>openml.evaluation.usercpu_time_millis_testing(1.0)</oml:flow>
+      <oml:value>46.875</oml:value>
+    </oml:evaluation>
+    <oml:evaluation>
+      <oml:name>usercpu_time_millis_training</oml:name>
+      <oml:flow>openml.evaluation.usercpu_time_millis_training(1.0)</oml:flow>
+      <oml:value>46.875</oml:value>
+    </oml:evaluation>
+    <oml:evaluation>
+      <oml:name>usercpu_time_millis</oml:name>
+      <oml:flow>openml.evaluation.usercpu_time_millis(1.0)</oml:flow>
+      <oml:value>93.75</oml:value>
+    </oml:evaluation>
+    <oml:evaluation>
+      <oml:name>os_information</oml:name>
+      <oml:flow>openml.userdefined.os_information(1.0)</oml:flow>
+      <oml:array_data>[Oracle Corporation, 1.8.0_66, amd64, Windows 10, 10.0]</oml:array_data>
+    </oml:evaluation>
+    <oml:evaluation>
+      <oml:name>scimark_benchmark</oml:name>
+      <oml:flow>openml.userdefined.scimark_benchmark(1.0)</oml:flow>
+      <oml:value>1959.645528</oml:value>
+      <oml:array_data>[1155.508850046098, 1593.8420361290785, 886.2912806828386, 1872.4571747448986, 4290.128299411283]</oml:array_data>
+    </oml:evaluation>
+  </oml:output_data>
+</oml:run>

@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 function RecommendationCard({ rec }) {
     const [expanded, setExpanded] = useState(false)
@@ -43,7 +44,9 @@ function RecommendationCard({ rec }) {
     )
 }
 
-export default function RecommendationsPanel({ recommendations }) {
+export default function RecommendationsPanel({ recommendations, buildingId }) {
+    const navigate = useNavigate()
+
     if (!recommendations) {
         return (
             <div className="card p-6 space-y-3">
@@ -56,16 +59,29 @@ export default function RecommendationsPanel({ recommendations }) {
     }
 
     return (
-        <div className="card p-6">
+        <div className="card p-6 flex flex-col">
             <div className="flex items-center justify-between mb-4">
                 <p className="section-title mb-0">Recommendations</p>
                 <span className="text-xs text-ink-muted">{recommendations.recommendations.length} actions</span>
             </div>
 
-            <div className="space-y-3 overflow-y-auto max-h-[420px] pr-1">
+            <div className="space-y-3 overflow-y-auto max-h-[420px] pr-1 flex-1">
                 {recommendations.recommendations.map((rec, i) => (
                     <RecommendationCard key={i} rec={rec} />
                 ))}
+            </div>
+
+            <div className="mt-6 pt-4 border-t border-border flex items-center justify-between">
+                <p className="text-xs text-ink-muted">Want more detailed AI analysis?</p>
+                <button
+                    onClick={() => navigate(`/deep-recommendations/${buildingId}`)}
+                    className="btn-primary py-1.5 px-3 text-xs flex items-center gap-1.5"
+                >
+                    Wanna check deeper?
+                    <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                    </svg>
+                </button>
             </div>
         </div>
     )

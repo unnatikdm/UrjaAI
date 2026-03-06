@@ -1,4 +1,5 @@
 import os
+
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
@@ -6,11 +7,15 @@ from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
 
 from app.db import engine, Base
-from app.routers import predict, recommendations, explain, whatif
+from app.routers import predict, recommendations, explain, whatif, rag
 from app.routers import auth as auth_router
 from app.routers import ingest as ingest_router
 from app.services.scheduler import create_scheduler
 from app.routers import sustainability
+from app.routers import browniepoint1
+from app.routers import browniepoint2
+from app.routers import rag_integration
+from app.services.rag.rag_service import rag_service
 
 # Import models so SQLAlchemy registers them with Base
 import app.models.user    # noqa
@@ -29,6 +34,19 @@ async def lifespan(app: FastAPI):
     scheduler = create_scheduler()
     scheduler.start()
     print("[Urja AI] DB ready. Scheduler started — ingesting every 15 min.")
+
+    # Initialize TabTransformer ML Services
+    from app.services.tabtransformer_manager import manager
+    try:
+        manager.initialize()
+    except Exception as e:
+        print(f"[Urja AI] Error initializing TabTransformer: {e}")
+
+    # Initialize RAG Service
+    try:
+        rag_service.initialize()
+    except Exception as e:
+        print(f"[Urja AI] Error initializing RAG: {e}")
 
     yield  # app runs here
 
@@ -71,6 +89,10 @@ app.include_router(explain.router)
 app.include_router(whatif.router)
 app.include_router(ingest_router.router)
 app.include_router(sustainability.router)
+app.include_router(browniepoint1.router)
+app.include_router(browniepoint2.router)
+app.include_router(rag.router)
+app.include_router(rag_integration.router)
 
 
 @app.get("/", tags=["Health"])
