@@ -1,0 +1,92 @@
+# Urja AI — Full Stack Build Walkthrough
+
+## What Was Built
+
+A complete full-stack campus energy optimization system split into two directories: `backend/` (FastAPI) and `frontend/` (React + Vite + Tailwind CSS).
+
+---
+
+## Backend (`d:/urja-ai/UrjaAI/backend/`)
+
+| File | Purpose |
+|---|---|
+| `app/main.py` | FastAPI app, CORS middleware, all routers mounted |
+| `app/schemas/predict.py` | Pydantic schemas for all 4 API endpoints |
+| `app/services/ml.py` | **Partner integration point** — 2 stubbed functions with `# TODO: ML` |
+| `app/services/data.py` | CSV data loader with synthetic fallback |
+| `app/routers/predict.py` | `POST /predict` |
+| `app/routers/recommendations.py` | `POST /recommendations` — rule-based, no ML |
+| `app/routers/explain.py` | `POST /explain` |
+| `app/routers/whatif.py` | `POST /whatif` |
+| `data/README.md` | CSV format spec for real sensor data |
+| `requirements.txt` | All dependencies (already installed) |
+
+**To run backend:**
+```bash
+cd d:/urja-ai/UrjaAI/backend
+uvicorn app.main:app --reload
+# Open http://localhost:8000/docs
+```
+
+---
+
+## Frontend (`d:/urja-ai/UrjaAI/frontend/`)
+
+| File | Purpose |
+|---|---|
+| `src/services/api.js` | Axios wrapper — auto falls back to mock data |
+| `src/services/mockData.js` | Static mock responses for all 4 endpoints |
+| `src/hooks/useDashboard.js` | Central state hook with debounced what-if |
+| `src/components/Header.jsx` | Building selector + datetime |
+| `src/components/MetricsCards.jsx` | 3 glassmorphism stat cards |
+| `src/components/ForecastChart.jsx` | Recharts line + confidence band + what-if overlay |
+| `src/components/RecommendationsPanel.jsx` | Cards with "Why?" accordions |
+| `src/components/ExplainabilitySection.jsx` | SHAP bar chart + explanation text |
+| `src/components/WhatIfControls.jsx` | Temperature + occupancy sliders (debounced) |
+| `src/pages/Dashboard.jsx` | Responsive 2-column grid page |
+
+**To run frontend:**
+```bash
+cd d:/urja-ai/UrjaAI/frontend
+npm run dev
+# Open http://localhost:5173
+```
+
+---
+
+## Verification Results
+
+All tested ✅ via browser automation.
+
+### Initial Dashboard View
+![Dashboard initial view](C:\Users\ARYAN\.gemini\antigravity\brain\bdb6c0f5-2437-4c66-a085-de96f4fe2a36\initial_view_1772547292287.png)
+
+### Full Dashboard (scrolled)
+![Full dashboard](C:\Users\ARYAN\.gemini\antigravity\brain\bdb6c0f5-2437-4c66-a085-de96f4fe2a36\full_dashboard_1772547297983.png)
+
+### "Why?" Accordion Expanded
+![Recommendation accordion](C:\Users\ARYAN\.gemini\antigravity\brain\bdb6c0f5-2437-4c66-a085-de96f4fe2a36\accordion_expanded_1772547334744.png)
+
+### What-If Slider Active
+![What-if scenario active](C:\Users\ARYAN\.gemini\antigravity\brain\bdb6c0f5-2437-4c66-a085-de96f4fe2a36\slider_adjusted_1772547347292.png)
+
+### Building Selector Changed
+![Building changed](C:\Users\ARYAN\.gemini\antigravity\brain\bdb6c0f5-2437-4c66-a085-de96f4fe2a36\building_changed_1772547396327.png)
+
+---
+
+## Partner Instructions (for ML integration)
+
+Your partner **only** needs to edit `backend/app/services/ml.py`:
+
+```python
+def run_forecast(building_id, horizon, ...):
+    # TODO: ML — load model, run inference
+    ...
+
+def get_explanation(building_id):
+    # TODO: ML — run SHAP / feature attribution
+    ...
+```
+
+Everything else is wired up and ready.

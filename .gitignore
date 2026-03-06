@@ -1,0 +1,141 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environment
+venv/
+env/
+ENV/
+.venv/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Environment Variables
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Logs
+*.log
+logs/
+log/
+
+# Model files (large binaries)
+*.h5
+*.pkl
+*.joblib
+*.pth
+*.pt
+*.onnx
+*.pb
+models/*.pkl
+models/*.joblib
+checkpoints/
+
+# Data files (potentially large)
+*.csv
+*.arff
+*.data
+data/raw/
+data/processed/
+
+# FAISS index files
+*.faiss
+*.index
+
+# TensorFlow/ML
+tensorflow/
+tf_logs/
+mlruns/
+wandb/
+
+# Node/Frontend
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Build outputs
+*.tgz
+*.tar.gz
+dist/
+build/
+.angular/
+
+# Coverage
+htmlcov/
+.coverage
+.coverage.*
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# Jupyter
+.ipynb_checkpoints
+*.ipynb
+
+# MyPy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Misc
+.cache/
+*.bak
+*.tmp
+*.temp
+*.pid
+*.seed
+*.pid.lock
+
+# Backend specific
+backend/app/services/tabtransformer/models/*.pkl
+backend/app/services/tabtransformer/models/*.joblib
+backend/**/*.db
+backend/**/data/raw/
+
+# Frontend specific
+frontend/dist/
+frontend/build/
+frontend/.cache/
+
+# Ignore all local env files except example
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Keep example files
+!.env.example

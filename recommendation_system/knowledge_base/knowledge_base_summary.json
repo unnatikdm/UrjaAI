@@ -1,0 +1,12 @@
+{
+  "total_documents": 9,
+  "document_types": {
+    "weather_pattern": 9
+  },
+  "buildings_covered": [
+    "B",
+    "A",
+    "C"
+  ],
+  "extraction_date": "2026-03-06T12:26:16.502960"
+}

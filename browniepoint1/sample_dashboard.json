@@ -1,0 +1,1036 @@
+{
+  "timestamp": "2026-03-05T18:32:36.183444",
+  "buildings": {
+    "A": {
+      "predictions_48h": [
+        135.16,
+        134.25,
+        132.63,
+        137.02,
+        138.29,
+        139.78,
+        141.92,
+        133.09,
+        115.74,
+        100.03,
+        127.92,
+        106.56,
+        71.03,
+        68.56,
+        77.83,
+        82.84,
+        89.44,
+        97.72,
+        117.41,
+        127.74,
+        130.66,
+        133.07,
+        134.89,
+        136.81,
+        140.62,
+        141.9,
+        142.99,
+        144.27,
+        142.72,
+        145.84,
+        147.68,
+        140.52,
+        118.18,
+        98.32,
+        81.51,
+        70.99,
+        65.42,
+        65.47,
+        68.7,
+        76.07,
+        86.65,
+        100.57,
+        118.47,
+        128.45,
+        132.12,
+        133.95,
+        136.41,
+        139.34
+      ],
+      "recommendations": [
+        {
+          "type": "load_shifting",
+          "building_id": "A",
+          "timestamp": "2026-03-05T16:00",
+          "temperature": 15.0,
+          "predicted_load": 89.44,
+          "action": "Shift non-critical loads to off-peak hours",
+          "energy_savings_kwh": 8.94,
+          "carbon_impact": {
+            "badge_earned": {
+              "icon": "\ud83c\udf32",
+              "key": "forest",
+              "name": "Forest",
+              "threshold": 500
+            },
+            "car_km_avoided": 9.52,
+            "co2_saved_kg": 2.38,
+            "co2_saved_tons": 0.0024,
+            "cumulative_co2_saved": 761.21,
+            "energy_saved_kwh": 8.94,
+            "grid_intensity": 0.266,
+            "homes_daily": 0.27,
+            "region": "Hungary",
+            "smartphone_charges": 894.0,
+            "trees_equivalent": 0.12
+          },
+          "priority": "medium"
+        },
+        {
+          "type": "load_shifting",
+          "building_id": "A",
+          "timestamp": "2026-03-05T17:00",
+          "temperature": 14.6,
+          "predicted_load": 97.72,
+          "action": "Shift non-critical loads to off-peak hours",
+          "energy_savings_kwh": 9.77,
+          "carbon_impact": {
+            "badge_earned": {
+              "icon": "\ud83c\udf32",
+              "key": "forest",
+              "name": "Forest",
+              "threshold": 500
+            },
+            "car_km_avoided": 10.41,
+            "co2_saved_kg": 2.6,
+            "co2_saved_tons": 0.0026,
+            "cumulative_co2_saved": 763.81,
+            "energy_saved_kwh": 9.77,
+            "grid_intensity": 0.266,
+            "homes_daily": 0.3,
+            "region": "Hungary",
+            "smartphone_charges": 977.0,
+            "trees_equivalent": 0.13
+          },
+          "priority": "medium"
+        },
+        {
+          "type": "load_shifting",
+          "building_id": "A",
+          "timestamp": "2026-03-05T18:00",
+          "temperature": 13.0,
+          "predicted_load": 117.41,
+          "action": "Shift non-critical loads to off-peak hours",
+          "energy_savings_kwh": 11.74,
+          "carbon_impact": {
+            "badge_earned": {
+              "icon": "\ud83c\udf32",
+              "key": "forest",
+              "name": "Forest",
+              "threshold": 500
+            },
+            "car_km_avoided": 12.5,
+            "co2_saved_kg": 3.13,
+            "co2_saved_tons": 0.0031,
+            "cumulative_co2_saved": 766.94,
+            "energy_saved_kwh": 11.74,
+            "grid_intensity": 0.266,
+            "homes_daily": 0.36,
+            "region": "Hungary",
+            "smartphone_charges": 1174.0,
+            "trees_equivalent": 0.16
+          },
+          "priority": "medium"
+        },
+        {
+          "type": "load_shifting",
+          "building_id": "A",
+          "timestamp": "2026-03-05T19:00",
+          "temperature": 11.6,
+          "predicted_load": 127.74,
+          "action": "Shift non-critical loads to off-peak hours",
+          "energy_savings_kwh": 12.77,
+          "carbon_impact": {
+            "badge_earned": {
+              "icon": "\ud83c\udf32",
+              "key": "forest",
+              "name": "Forest",
+              "threshold": 500
+            },
+            "car_km_avoided": 13.6,
+            "co2_saved_kg": 3.4,
+            "co2_saved_tons": 0.0034,
+            "cumulative_co2_saved": 770.34,
+            "energy_saved_kwh": 12.77,
+            "grid_intensity": 0.266,
+            "homes_daily": 0.39,
+            "region": "Hungary",
+            "smartphone_charges": 1277.0,
+            "trees_equivalent": 0.17
+          },
+          "priority": "medium"
+        },
+        {
+          "type": "load_shifting",
+          "building_id": "A",
+          "timestamp": "2026-03-05T20:00",
+          "temperature": 10.6,
+          "predicted_load": 130.66,
+          "action": "Shift non-critical loads to off-peak hours",
+          "energy_savings_kwh": 13.07,
+          "carbon_impact": {
+            "badge_earned": {
+              "icon": "\ud83c\udf32",
+              "key": "forest",
+              "name": "Forest",
+              "threshold": 500
+            },
+            "car_km_avoided": 13.91,
+            "co2_saved_kg": 3.48,
+            "co2_saved_tons": 0.0035,
+            "cumulative_co2_saved": 773.82,
+            "energy_saved_kwh": 13.07,
+            "grid_intensity": 0.266,
+            "homes_daily": 0.4,
+            "region": "Hungary",
+            "smartphone_charges": 1307.0,
+            "trees_equivalent": 0.17
+          },
+          "priority": "medium"
+        },
+        {
+          "type": "load_shifting",
+          "building_id": "A",
+          "timestamp": "2026-03-06T16:00",
+          "temperature": 14.7,
+          "predicted_load": 86.65,
+          "action": "Shift non-critical loads to off-peak hours",
+          "energy_savings_kwh": 8.67,
+          "carbon_impact": {
+            "badge_earned": {
+              "icon": "\ud83c\udf32",
+              "key": "forest",
+              "name": "Forest",
+              "threshold": 500
+            },
+            "car_km_avoided": 9.23,
+            "co2_saved_kg": 2.31,
+            "co2_saved_tons": 0.0023,
+            "cumulative_co2_saved": 781.92,
+            "energy_saved_kwh": 8.67,
+            "grid_intensity": 0.266,
+            "homes_daily": 0.26,
+            "region": "Hungary",
+            "smartphone_charges": 867.0,
+            "trees_equivalent": 0.12
+          },
+          "priority": "medium"
+        },
+        {
+          "type": "load_shifting",
+          "building_id": "A",
+          "timestamp": "2026-03-06T17:00",
+          "temperature": 14.3,
+          "predicted_load": 100.57,
+          "action": "Shift non-critical loads to off-peak hours",
+          "energy_savings_kwh": 10.06,
+          "carbon_impact": {
+            "badge_earned": {
+              "icon": "\ud83c\udf32",
+              "key": "forest",
+              "name": "Forest",
+              "threshold": 500
+            },
+            "car_km_avoided": 10.71,
+            "co2_saved_kg": 2.68,
+            "co2_saved_tons": 0.0027,
+            "cumulative_co2_saved": 784.59,
+            "energy_saved_kwh": 10.06,
+            "grid_intensity": 0.266,
+            "homes_daily": 0.31,
+            "region": "Hungary",
+            "smartphone_charges": 1006.0,
+            "trees_equivalent": 0.13
+          },
+          "priority": "medium"
+        },
+        {
+          "type": "load_shifting",
+          "building_id": "A",
+          "timestamp": "2026-03-06T18:00",
+          "temperature": 13.1,
+          "predicted_load": 118.47,
+          "action": "Shift non-critical loads to off-peak hours",
+          "energy_savings_kwh": 11.85,
+          "carbon_impact": {
+            "badge_earned": {
+              "icon": "\ud83c\udf32",
+              "key": "forest",
+              "name": "Forest",
+              "threshold": 500
+            },
+            "car_km_avoided": 12.61,
+            "co2_saved_kg": 3.15,
+            "co2_saved_tons": 0.0032,
+            "cumulative_co2_saved": 787.75,
+            "energy_saved_kwh": 11.85,
+            "grid_intensity": 0.266,
+            "homes_daily": 0.36,
+            "region": "Hungary",
+            "smartphone_charges": 1185.0,
+            "trees_equivalent": 0.16
+          },
+          "priority": "medium"
+        },
+        {
+          "type": "load_shifting",
+          "building_id": "A",
+          "timestamp": "2026-03-06T19:00",
+          "temperature": 11.0,
+          "predicted_load": 128.45,
+          "action": "Shift non-critical loads to off-peak hours",
+          "energy_savings_kwh": 12.84,
+          "carbon_impact": {
+            "badge_earned": {
+              "icon": "\ud83c\udf32",
+              "key": "forest",
+              "name": "Forest",
+              "threshold": 500
+            },
+            "car_km_avoided": 13.68,
+            "co2_saved_kg": 3.42,
+            "co2_saved_tons": 0.0034,
+            "cumulative_co2_saved": 791.17,
+            "energy_saved_kwh": 12.84,
+            "grid_intensity": 0.266,
+            "homes_daily": 0.39,
+            "region": "Hungary",
+            "smartphone_charges": 1284.0,
+            "trees_equivalent": 0.17
+          },
+          "priority": "medium"
+        },
+        {
+          "type": "load_shifting",
+          "building_id": "A",
+          "timestamp": "2026-03-06T20:00",
+          "temperature": 10.2,
+          "predicted_load": 132.12,
+          "action": "Shift non-critical loads to off-peak hours",
+          "energy_savings_kwh": 13.21,
+          "carbon_impact": {
+            "badge_earned": {
+              "icon": "\ud83c\udf32",
+              "key": "forest",
+              "name": "Forest",
+              "threshold": 500
+            },
+            "car_km_avoided": 14.07,
+            "co2_saved_kg": 3.52,
+            "co2_saved_tons": 0.0035,
+            "cumulative_co2_saved": 794.68,
+            "energy_saved_kwh": 13.21,
+            "grid_intensity": 0.266,
+            "homes_daily": 0.4,
+            "region": "Hungary",
+            "smartphone_charges": 1321.0,
+            "trees_equivalent": 0.18
+          },
+          "priority": "medium"
+        }
+      ],
+      "potential_savings": {
+        "energy_kwh": 112.92,
+        "co2_kg": 30.07
+      },
+      "current_weather": {
+        "temperature": 10.0,
+        "humidity": 77
+      }
+    },
+    "B": {
+      "predictions_48h": [
+        189.72,
+        188.31,
+        186.42,
+        191.7,
+        193.22,
+        194.8,
+        197.16,
+        193.77,
+        180.65,
+        167.41,
+        181.79,
+        165.07,
+        141.05,
+        137.81,
+        142.33,
+        145.36,
+        149.51,
+        153.03,
+        168.41,
+        181.31,
+        184.15,
+        186.53,
+        188.47,
+        190.42,
+        194.65,
+        195.83,
+        196.99,
+        198.53,
+        196.97,
+        200.46,
+        202.41,
+        198.21,
+        182.72,
+        165.45,
+        150.29,
+        141.34,
+        136.21,
+        135.65,
+        136.77,
+        140.84,
+        147.38,
+        156.77,
+        170.06,
+        181.54,
+        185.7,
+        187.65,
+        190.34,
+        193.46
+      ],
+      "recommendations": [
+        {
+          "type": "load_shifting",
+          "building_id": "B",
+          "timestamp": "2026-03-05T16:00",
+          "temperature": 15.0,
+          "predicted_load": 149.51,
+          "action": "Shift non-critical loads to off-peak hours",
+          "energy_savings_kwh": 14.95,
+          "carbon_impact": {
+            "badge_earned": {
+              "icon": "\ud83c\udf32",
+              "key": "forest",
+              "name": "Forest",
+              "threshold": 500
+            },
+            "car_km_avoided": 15.92,
+            "co2_saved_kg": 3.98,
+            "co2_saved_tons": 0.004,
+            "cumulative_co2_saved": 805.59,
+            "energy_saved_kwh": 14.95,
+            "grid_intensity": 0.266,
+            "homes_daily": 0.45,
+            "region": "Hungary",
+            "smartphone_charges": 1495.0,
+            "trees_equivalent": 0.2
+          },
+          "priority": "medium"
+        },
+        {
+          "type": "load_shifting",
+          "building_id": "B",
+          "timestamp": "2026-03-05T17:00",
+          "temperature": 14.6,
+          "predicted_load": 153.03,
+          "action": "Shift non-critical loads to off-peak hours",
+          "energy_savings_kwh": 15.3,
+          "carbon_impact": {
+            "badge_earned": {
+              "icon": "\ud83c\udf32",
+              "key": "forest",
+              "name": "Forest",
+              "threshold": 500
+            },
+            "car_km_avoided": 16.29,
+            "co2_saved_kg": 4.07,
+            "co2_saved_tons": 0.0041,
+            "cumulative_co2_saved": 809.67,
+            "energy_saved_kwh": 15.3,
+            "grid_intensity": 0.266,
+            "homes_daily": 0.47,
+            "region": "Hungary",
+            "smartphone_charges": 1530.0,
+            "trees_equivalent": 0.2
+          },
+          "priority": "medium"
+        },
+        {
+          "type": "load_shifting",
+          "building_id": "B",
+          "timestamp": "2026-03-05T18:00",
+          "temperature": 13.0,
+          "predicted_load": 168.41,
+          "action": "Shift non-critical loads to off-peak hours",
+          "energy_savings_kwh": 16.84,
+          "carbon_impact": {
+            "badge_earned": {
+              "icon": "\ud83c\udf32",
+              "key": "forest",
+              "name": "Forest",
+              "threshold": 500
+            },
+            "car_km_avoided": 17.93,
+            "co2_saved_kg": 4.48,
+            "co2_saved_tons": 0.0045,
+            "cumulative_co2_saved": 814.15,
+            "energy_saved_kwh": 16.84,
+            "grid_intensity": 0.266,
+            "homes_daily": 0.51,
+            "region": "Hungary",
+            "smartphone_charges": 1684.0,
+            "trees_equivalent": 0.22
+          },
+          "priority": "medium"
+        },
+        {
+          "type": "load_shifting",
+          "building_id": "B",
+          "timestamp": "2026-03-05T19:00",
+          "temperature": 11.6,
+          "predicted_load": 181.31,
+          "action": "Shift non-critical loads to off-peak hours",
+          "energy_savings_kwh": 18.13,
+          "carbon_impact": {
+            "badge_earned": {
+              "icon": "\ud83c\udf32",
+              "key": "forest",
+              "name": "Forest",
+              "threshold": 500
+            },
+            "car_km_avoided": 19.31,
+            "co2_saved_kg": 4.83,
+            "co2_saved_tons": 0.0048,
+            "cumulative_co2_saved": 818.98,
+            "energy_saved_kwh": 18.13,
+            "grid_intensity": 0.266,
+            "homes_daily": 0.55,
+            "region": "Hungary",
+            "smartphone_charges": 1813.0,
+            "trees_equivalent": 0.24
+          },
+          "priority": "medium"
+        },
+        {
+          "type": "load_shifting",
+          "building_id": "B",
+          "timestamp": "2026-03-05T20:00",
+          "temperature": 10.6,
+          "predicted_load": 184.15,
+          "action": "Shift non-critical loads to off-peak hours",
+          "energy_savings_kwh": 18.42,
+          "carbon_impact": {
+            "badge_earned": {
+              "icon": "\ud83c\udf32",
+              "key": "forest",
+              "name": "Forest",
+              "threshold": 500
+            },
+            "car_km_avoided": 19.61,
+            "co2_saved_kg": 4.9,
+            "co2_saved_tons": 0.0049,
+            "cumulative_co2_saved": 823.88,
+            "energy_saved_kwh": 18.42,
+            "grid_intensity": 0.266,
+            "homes_daily": 0.56,
+            "region": "Hungary",
+            "smartphone_charges": 1842.0,
+            "trees_equivalent": 0.25
+          },
+          "priority": "medium"
+        },
+        {
+          "type": "load_shifting",
+          "building_id": "B",
+          "timestamp": "2026-03-06T16:00",
+          "temperature": 14.7,
+          "predicted_load": 147.38,
+          "action": "Shift non-critical loads to off-peak hours",
+          "energy_savings_kwh": 14.74,
+          "carbon_impact": {
+            "badge_earned": {
+              "icon": "\ud83c\udf32",
+              "key": "forest",
+              "name": "Forest",
+              "threshold": 500
+            },
+            "car_km_avoided": 15.69,
+            "co2_saved_kg": 3.92,
+            "co2_saved_tons": 0.0039,
+            "cumulative_co2_saved": 839.33,
+            "energy_saved_kwh": 14.74,
+            "grid_intensity": 0.266,
+            "homes_daily": 0.45,
+            "region": "Hungary",
+            "smartphone_charges": 1474.0,
+            "trees_equivalent": 0.2
+          },
+          "priority": "medium"
+        },
+        {
+          "type": "load_shifting",
+          "building_id": "B",
+          "timestamp": "2026-03-06T17:00",
+          "temperature": 14.3,
+          "predicted_load": 156.77,
+          "action": "Shift non-critical loads to off-peak hours",
+          "energy_savings_kwh": 15.68,
+          "carbon_impact": {
+            "badge_earned": {
+              "icon": "\ud83c\udf32",
+              "key": "forest",
+              "name": "Forest",
+              "threshold": 500
+            },
+            "car_km_avoided": 16.69,
+            "co2_saved_kg": 4.17,
+            "co2_saved_tons": 0.0042,
+            "cumulative_co2_saved": 843.5,
+            "energy_saved_kwh": 15.68,
+            "grid_intensity": 0.266,
+            "homes_daily": 0.48,
+            "region": "Hungary",
+            "smartphone_charges": 1568.0,
+            "trees_equivalent": 0.21
+          },
+          "priority": "medium"
+        },
+        {
+          "type": "load_shifting",
+          "building_id": "B",
+          "timestamp": "2026-03-06T18:00",
+          "temperature": 13.1,
+          "predicted_load": 170.06,
+          "action": "Shift non-critical loads to off-peak hours",
+          "energy_savings_kwh": 17.01,
+          "carbon_impact": {
+            "badge_earned": {
+              "icon": "\ud83c\udf32",
+              "key": "forest",
+              "name": "Forest",
+              "threshold": 500
+            },
+            "car_km_avoided": 18.11,
+            "co2_saved_kg": 4.53,
+            "co2_saved_tons": 0.0045,
+            "cumulative_co2_saved": 848.03,
+            "energy_saved_kwh": 17.01,
+            "grid_intensity": 0.266,
+            "homes_daily": 0.52,
+            "region": "Hungary",
+            "smartphone_charges": 1701.0,
+            "trees_equivalent": 0.23
+          },
+          "priority": "medium"
+        },
+        {
+          "type": "load_shifting",
+          "building_id": "B",
+          "timestamp": "2026-03-06T19:00",
+          "temperature": 11.0,
+          "predicted_load": 181.54,
+          "action": "Shift non-critical loads to off-peak hours",
+          "energy_savings_kwh": 18.15,
+          "carbon_impact": {
+            "badge_earned": {
+              "icon": "\ud83c\udf32",
+              "key": "forest",
+              "name": "Forest",
+              "threshold": 500
+            },
+            "car_km_avoided": 19.33,
+            "co2_saved_kg": 4.83,
+            "co2_saved_tons": 0.0048,
+            "cumulative_co2_saved": 852.86,
+            "energy_saved_kwh": 18.15,
+            "grid_intensity": 0.266,
+            "homes_daily": 0.55,
+            "region": "Hungary",
+            "smartphone_charges": 1815.0,
+            "trees_equivalent": 0.24
+          },
+          "priority": "medium"
+        },
+        {
+          "type": "load_shifting",
+          "building_id": "B",
+          "timestamp": "2026-03-06T20:00",
+          "temperature": 10.2,
+          "predicted_load": 185.7,
+          "action": "Shift non-critical loads to off-peak hours",
+          "energy_savings_kwh": 18.57,
+          "carbon_impact": {
+            "badge_earned": {
+              "icon": "\ud83c\udf32",
+              "key": "forest",
+              "name": "Forest",
+              "threshold": 500
+            },
+            "car_km_avoided": 19.77,
+            "co2_saved_kg": 4.94,
+            "co2_saved_tons": 0.0049,
+            "cumulative_co2_saved": 857.8,
+            "energy_saved_kwh": 18.57,
+            "grid_intensity": 0.266,
+            "homes_daily": 0.56,
+            "region": "Hungary",
+            "smartphone_charges": 1857.0,
+            "trees_equivalent": 0.25
+          },
+          "priority": "medium"
+        }
+      ],
+      "potential_savings": {
+        "energy_kwh": 167.79,
+        "co2_kg": 44.65
+      },
+      "current_weather": {
+        "temperature": 10.0,
+        "humidity": 77
+      }
+    },
+    "C": {
+      "predictions_48h": [
+        155.23,
+        154.11,
+        152.45,
+        157.02,
+        158.34,
+        159.78,
+        161.89,
+        155.51,
+        140.62,
+        126.59,
+        148.07,
+        129.49,
+        99.99,
+        97.32,
+        104.33,
+        108.36,
+        113.73,
+        119.66,
+        136.77,
+        147.77,
+        150.46,
+        152.69,
+        154.45,
+        156.26,
+        160.04,
+        161.17,
+        162.22,
+        163.56,
+        162.11,
+        165.22,
+        166.99,
+        161.33,
+        142.69,
+        124.72,
+        109.28,
+        99.9,
+        94.8,
+        94.66,
+        96.95,
+        102.7,
+        111.25,
+        122.79,
+        138.07,
+        148.18,
+        151.87,
+        153.63,
+        156.05,
+        158.88
+      ],
+      "recommendations": [
+        {
+          "type": "load_shifting",
+          "building_id": "C",
+          "timestamp": "2026-03-05T16:00",
+          "temperature": 15.0,
+          "predicted_load": 113.73,
+          "action": "Shift non-critical loads to off-peak hours",
+          "energy_savings_kwh": 11.37,
+          "carbon_impact": {
+            "badge_earned": {
+              "icon": "\ud83c\udf32",
+              "key": "forest",
+              "name": "Forest",
+              "threshold": 500
+            },
+            "car_km_avoided": 12.11,
+            "co2_saved_kg": 3.03,
+            "co2_saved_tons": 0.003,
+            "cumulative_co2_saved": 865.79,
+            "energy_saved_kwh": 11.37,
+            "grid_intensity": 0.266,
+            "homes_daily": 0.35,
+            "region": "Hungary",
+            "smartphone_charges": 1137.0,
+            "trees_equivalent": 0.15
+          },
+          "priority": "medium"
+        },
+        {
+          "type": "load_shifting",
+          "building_id": "C",
+          "timestamp": "2026-03-05T17:00",
+          "temperature": 14.6,
+          "predicted_load": 119.66,
+          "action": "Shift non-critical loads to off-peak hours",
+          "energy_savings_kwh": 11.97,
+          "carbon_impact": {
+            "badge_earned": {
+              "icon": "\ud83c\udf32",
+              "key": "forest",
+              "name": "Forest",
+              "threshold": 500
+            },
+            "car_km_avoided": 12.74,
+            "co2_saved_kg": 3.19,
+            "co2_saved_tons": 0.0032,
+            "cumulative_co2_saved": 868.98,
+            "energy_saved_kwh": 11.97,
+            "grid_intensity": 0.266,
+            "homes_daily": 0.36,
+            "region": "Hungary",
+            "smartphone_charges": 1197.0,
+            "trees_equivalent": 0.16
+          },
+          "priority": "medium"
+        },
+        {
+          "type": "load_shifting",
+          "building_id": "C",
+          "timestamp": "2026-03-05T18:00",
+          "temperature": 13.0,
+          "predicted_load": 136.77,
+          "action": "Shift non-critical loads to off-peak hours",
+          "energy_savings_kwh": 13.68,
+          "carbon_impact": {
+            "badge_earned": {
+              "icon": "\ud83c\udf32",
+              "key": "forest",
+              "name": "Forest",
+              "threshold": 500
+            },
+            "car_km_avoided": 14.56,
+            "co2_saved_kg": 3.64,
+            "co2_saved_tons": 0.0036,
+            "cumulative_co2_saved": 872.62,
+            "energy_saved_kwh": 13.68,
+            "grid_intensity": 0.266,
+            "homes_daily": 0.42,
+            "region": "Hungary",
+            "smartphone_charges": 1368.0,
+            "trees_equivalent": 0.18
+          },
+          "priority": "medium"
+        },
+        {
+          "type": "load_shifting",
+          "building_id": "C",
+          "timestamp": "2026-03-05T19:00",
+          "temperature": 11.6,
+          "predicted_load": 147.77,
+          "action": "Shift non-critical loads to off-peak hours",
+          "energy_savings_kwh": 14.78,
+          "carbon_impact": {
+            "badge_earned": {
+              "icon": "\ud83c\udf32",
+              "key": "forest",
+              "name": "Forest",
+              "threshold": 500
+            },
+            "car_km_avoided": 15.73,
+            "co2_saved_kg": 3.93,
+            "co2_saved_tons": 0.0039,
+            "cumulative_co2_saved": 876.55,
+            "energy_saved_kwh": 14.78,
+            "grid_intensity": 0.266,
+            "homes_daily": 0.45,
+            "region": "Hungary",
+            "smartphone_charges": 1478.0,
+            "trees_equivalent": 0.2
+          },
+          "priority": "medium"
+        },
+        {
+          "type": "load_shifting",
+          "building_id": "C",
+          "timestamp": "2026-03-05T20:00",
+          "temperature": 10.6,
+          "predicted_load": 150.46,
+          "action": "Shift non-critical loads to off-peak hours",
+          "energy_savings_kwh": 15.05,
+          "carbon_impact": {
+            "badge_earned": {
+              "icon": "\ud83c\udf32",
+              "key": "forest",
+              "name": "Forest",
+              "threshold": 500
+            },
+            "car_km_avoided": 16.02,
+            "co2_saved_kg": 4.01,
+            "co2_saved_tons": 0.004,
+            "cumulative_co2_saved": 880.56,
+            "energy_saved_kwh": 15.05,
+            "grid_intensity": 0.266,
+            "homes_daily": 0.46,
+            "region": "Hungary",
+            "smartphone_charges": 1505.0,
+            "trees_equivalent": 0.2
+          },
+          "priority": "medium"
+        },
+        {
+          "type": "load_shifting",
+          "building_id": "C",
+          "timestamp": "2026-03-06T16:00",
+          "temperature": 14.7,
+          "predicted_load": 111.25,
+          "action": "Shift non-critical loads to off-peak hours",
+          "energy_savings_kwh": 11.12,
+          "carbon_impact": {
+            "badge_earned": {
+              "icon": "\ud83c\udf32",
+              "key": "forest",
+              "name": "Forest",
+              "threshold": 500
+            },
+            "car_km_avoided": 11.85,
+            "co2_saved_kg": 2.96,
+            "co2_saved_tons": 0.003,
+            "cumulative_co2_saved": 891.68,
+            "energy_saved_kwh": 11.12,
+            "grid_intensity": 0.266,
+            "homes_daily": 0.34,
+            "region": "Hungary",
+            "smartphone_charges": 1112.0,
+            "trees_equivalent": 0.15
+          },
+          "priority": "medium"
+        },
+        {
+          "type": "load_shifting",
+          "building_id": "C",
+          "timestamp": "2026-03-06T17:00",
+          "temperature": 14.3,
+          "predicted_load": 122.79,
+          "action": "Shift non-critical loads to off-peak hours",
+          "energy_savings_kwh": 12.28,
+          "carbon_impact": {
+            "badge_earned": {
+              "icon": "\ud83c\udf32",
+              "key": "forest",
+              "name": "Forest",
+              "threshold": 500
+            },
+            "car_km_avoided": 13.07,
+            "co2_saved_kg": 3.27,
+            "co2_saved_tons": 0.0033,
+            "cumulative_co2_saved": 894.94,
+            "energy_saved_kwh": 12.28,
+            "grid_intensity": 0.266,
+            "homes_daily": 0.37,
+            "region": "Hungary",
+            "smartphone_charges": 1228.0,
+            "trees_equivalent": 0.16
+          },
+          "priority": "medium"
+        },
+        {
+          "type": "load_shifting",
+          "building_id": "C",
+          "timestamp": "2026-03-06T18:00",
+          "temperature": 13.1,
+          "predicted_load": 138.07,
+          "action": "Shift non-critical loads to off-peak hours",
+          "energy_savings_kwh": 13.81,
+          "carbon_impact": {
+            "badge_earned": {
+              "icon": "\ud83c\udf32",
+              "key": "forest",
+              "name": "Forest",
+              "threshold": 500
+            },
+            "car_km_avoided": 14.7,
+            "co2_saved_kg": 3.68,
+            "co2_saved_tons": 0.0037,
+            "cumulative_co2_saved": 898.62,
+            "energy_saved_kwh": 13.81,
+            "grid_intensity": 0.266,
+            "homes_daily": 0.42,
+            "region": "Hungary",
+            "smartphone_charges": 1381.0,
+            "trees_equivalent": 0.18
+          },
+          "priority": "medium"
+        },
+        {
+          "type": "load_shifting",
+          "building_id": "C",
+          "timestamp": "2026-03-06T19:00",
+          "temperature": 11.0,
+          "predicted_load": 148.18,
+          "action": "Shift non-critical loads to off-peak hours",
+          "energy_savings_kwh": 14.82,
+          "carbon_impact": {
+            "badge_earned": {
+              "icon": "\ud83c\udf32",
+              "key": "forest",
+              "name": "Forest",
+              "threshold": 500
+            },
+            "car_km_avoided": 15.78,
+            "co2_saved_kg": 3.94,
+            "co2_saved_tons": 0.0039,
+            "cumulative_co2_saved": 902.56,
+            "energy_saved_kwh": 14.82,
+            "grid_intensity": 0.266,
+            "homes_daily": 0.45,
+            "region": "Hungary",
+            "smartphone_charges": 1482.0,
+            "trees_equivalent": 0.2
+          },
+          "priority": "medium"
+        },
+        {
+          "type": "load_shifting",
+          "building_id": "C",
+          "timestamp": "2026-03-06T20:00",
+          "temperature": 10.2,
+          "predicted_load": 151.87,
+          "action": "Shift non-critical loads to off-peak hours",
+          "energy_savings_kwh": 15.19,
+          "carbon_impact": {
+            "badge_earned": {
+              "icon": "\ud83c\udf32",
+              "key": "forest",
+              "name": "Forest",
+              "threshold": 500
+            },
+            "car_km_avoided": 16.17,
+            "co2_saved_kg": 4.04,
+            "co2_saved_tons": 0.004,
+            "cumulative_co2_saved": 906.61,
+            "energy_saved_kwh": 15.19,
+            "grid_intensity": 0.266,
+            "homes_daily": 0.46,
+            "region": "Hungary",
+            "smartphone_charges": 1519.0,
+            "trees_equivalent": 0.2
+          },
+          "priority": "medium"
+        }
+      ],
+      "potential_savings": {
+        "energy_kwh": 134.07,
+        "co2_kg": 35.69
+      },
+      "current_weather": {
+        "temperature": 10.0,
+        "humidity": 77
+      }
+    }
+  },
+  "weather_alerts": [],
+  "total_savings": {
+    "energy_kwh": 414.78,
+    "co2_kg": 110.41
+  }
+}

@@ -1,0 +1,33 @@
+
+# Real Data Integration Requirements
+fastapi>=0.104.0
+uvicorn>=0.24.0
+pydantic>=2.4.0
+aiohttp>=3.8.0
+pandas>=2.0.0
+numpy>=1.24.0
+scikit-learn>=1.3.0
+
+# Weather Service
+requests>=2.31.0
+
+# Model and SHAP
+xgboost>=1.7.0
+shap>=0.41.0
+joblib>=1.3.0
+
+# Data Processing
+pyarrow>=10.0.0
+openpyxl>=3.1.0
+
+# Database (optional)
+sqlalchemy>=2.0.0
+sqlite3
+
+# Caching
+diskcache>=5.6.0
+
+# Utilities
+python-dotenv>=1.0.0
+asyncio
+uuid
