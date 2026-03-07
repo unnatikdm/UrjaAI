@@ -74,19 +74,16 @@ export default function Browniepoint1({ selectedBuilding }) {
 
             {/* Section Navigation */}
             <div className="flex gap-2 border-b border-border-subtle">
-                {['weather', 'alerts', 'badges', 'carbon'].map(section => (
+                {['weather', 'carbon'].map(section => (
                     <button
                         key={section}
                         onClick={() => setActiveSection(section)}
-                        className={`pb-3 px-4 font-medium transition-colors capitalize ${
-                            activeSection === section
+                        className={`pb-3 px-4 font-medium transition-colors capitalize ${activeSection === section
                                 ? 'text-emerald-600 border-b-2 border-emerald-600'
                                 : 'text-ink-faint hover:text-ink-default'
-                        }`}
+                            }`}
                     >
                         {section === 'weather' && '🌤️ Weather'}
-                        {section === 'alerts' && '⚠️ Alerts'}
-                        {section === 'badges' && '🏅 Badges'}
                         {section === 'carbon' && '🌱 Carbon Impact'}
                     </button>
                 ))}
@@ -98,7 +95,7 @@ export default function Browniepoint1({ selectedBuilding }) {
                     <h2 className="text-2xl font-bold text-ink-default mb-6 flex items-center gap-2">
                         🌤️ Live Weather Forecast
                     </h2>
-                    
+
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
                         {weather.timestamps && weather.timestamps.slice(0, 8).map((time, idx) => (
                             <div key={idx} className="bg-white rounded-lg p-4 border border-border-subtle hover:shadow-md transition-shadow">
@@ -146,56 +143,7 @@ export default function Browniepoint1({ selectedBuilding }) {
                 </div>
             )}
 
-            {/* Alerts Section */}
-            {activeSection === 'alerts' && (
-                <div className="space-y-4">
-                    <h2 className="text-2xl font-bold text-ink-default flex items-center gap-2">⚠️ Weather Alerts</h2>
-                    {alerts.length > 0 ? (
-                        <div className="space-y-3">
-                            {alerts.map((alert, idx) => (
-                                <div key={idx} className={`rounded-lg p-4 border-l-4 ${
-                                    alert.severity === 'critical' ? 'bg-red-50 border-red-500 text-red-800' :
-                                    alert.severity === 'warning' ? 'bg-yellow-50 border-yellow-500 text-yellow-800' :
-                                    'bg-blue-50 border-blue-500 text-blue-800'
-                                }`}>
-                                    <p className="font-semibold mb-1">{alert.alert_type}</p>
-                                    <p className="text-sm">{alert.description}</p>
-                                    <p className="text-xs opacity-75 mt-2">Severity: {alert.severity}</p>
-                                </div>
-                            ))}
-                        </div>
-                    ) : (
-                        <div className="bg-emerald-50 border border-emerald-200 rounded-lg p-6 text-center">
-                            <p className="text-emerald-700 font-semibold">✅ No weather alerts at this time</p>
-                        </div>
-                    )}
-                </div>
-            )}
 
-            {/* Badges Section */}
-            {activeSection === 'badges' && (
-                <div className="space-y-4">
-                    <h2 className="text-2xl font-bold text-ink-default flex items-center gap-2">🏅 Gamification Badges</h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                        {Array.isArray(badges) && badges.length > 0 ? (
-                            badges.map((badge, idx) => (
-                                <div key={idx} className={`rounded-lg p-4 border-2 ${
-                                    badge.earned ? 'bg-amber-50 border-amber-300' : 'bg-gray-50 border-gray-200 opacity-50'
-                                }`}>
-                                    <p className="text-3xl mb-2">{badge.icon}</p>
-                                    <p className="font-semibold text-ink-default mb-1">{badge.name}</p>
-                                    <p className="text-sm text-ink-faint mb-2">{badge.description}</p>
-                                    <p className="text-xs font-medium text-amber-700">Progress: {badge.progress}%</p>
-                                </div>
-                            ))
-                        ) : (
-                            <div className="col-span-full bg-blue-50 border border-blue-200 rounded-lg p-6 text-center">
-                                <p className="text-blue-700 font-semibold">🎯 Earn badges by reducing energy consumption!</p>
-                            </div>
-                        )}
-                    </div>
-                </div>
-            )}
 
             {/* Carbon Impact Section */}
             {activeSection === 'carbon' && (

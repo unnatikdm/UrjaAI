@@ -1,7 +1,6 @@
 import React from 'react';
 
 export default function SustainabilityPanel({ weather, alerts, badges, stats, carbonImpact }) {
-    if (!weather && !stats) return null;
 
     // Get current weather (first item in hourly array)
     const currentTemp = weather?.temperature?.[0];
@@ -147,6 +146,28 @@ export default function SustainabilityPanel({ weather, alerts, badges, stats, ca
                             Adjust "What-If" parameters to see potential carbon savings!
                         </div>
                     )}
+                </div>
+
+                {/* Leaderboard Section */}
+                <div className="mt-2">
+                    <h3 className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3 flex items-center gap-1">🏆 Inter-College Carbon Leaderboard</h3>
+                    <div className="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm">
+                        <div className="divide-y divide-slate-100">
+                            {[
+                                { rank: 1, name: 'Vidyalankar', score: '3,240', icon: '🥇', highlight: true },
+                                { rank: 2, name: 'VJTI', score: '2,890', icon: '🥈', highlight: false },
+                                { rank: 3, name: 'SPIT', score: '2,450', icon: '🥉', highlight: false }
+                            ].map((college, idx) => (
+                                <div key={idx} className={`flex items-center justify-between p-3 ${college.highlight ? 'bg-emerald-50' : 'hover:bg-slate-50'} transition-colors`}>
+                                    <div className="flex items-center gap-3">
+                                        <span className="text-xl">{college.icon}</span>
+                                        <span className={`font-bold ${college.highlight ? 'text-emerald-800' : 'text-slate-700'}`}>{college.name}</span>
+                                    </div>
+                                    <span className={`text-sm font-semibold ${college.highlight ? 'text-emerald-600' : 'text-slate-500'}`}>{college.score} kg CO₂</span>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
                 </div>
 
             </div>

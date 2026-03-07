@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import Header from '../components/Header'
 import Browniepoint1 from '../components/Browniepoint1'
-import Browniepoint2 from '../components/Browniepoint2'
 
 export default function SpecialFeatures() {
     const [activeTab, setActiveTab] = useState('browniepoint1')
@@ -28,28 +27,14 @@ export default function SpecialFeatures() {
                     <div className="flex gap-8">
                         <button
                             onClick={() => setActiveTab('browniepoint1')}
-                            className={`pb-4 px-2 font-semibold text-lg relative transition-colors ${
-                                activeTab === 'browniepoint1'
+                            className={`pb-4 px-2 font-semibold text-lg relative transition-colors ${activeTab === 'browniepoint1'
                                     ? 'text-emerald-600'
                                     : 'text-ink-faint hover:text-ink-default'
-                            }`}
+                                }`}
                         >
                             🌱 Carbon Tracker
                             {activeTab === 'browniepoint1' && (
                                 <div className="absolute bottom-0 left-0 right-0 h-1 bg-emerald-600 rounded-full"></div>
-                            )}
-                        </button>
-                        <button
-                            onClick={() => setActiveTab('browniepoint2')}
-                            className={`pb-4 px-2 font-semibold text-lg relative transition-colors ${
-                                activeTab === 'browniepoint2'
-                                    ? 'text-blue-600'
-                                    : 'text-ink-faint hover:text-ink-default'
-                            }`}
-                        >
-                            🧠 TabTransformer ML
-                            {activeTab === 'browniepoint2' && (
-                                <div className="absolute bottom-0 left-0 right-0 h-1 bg-blue-600 rounded-full"></div>
                             )}
                         </button>
                     </div>
@@ -59,9 +44,6 @@ export default function SpecialFeatures() {
                 <div className="animate-fadeIn">
                     {activeTab === 'browniepoint1' && (
                         <Browniepoint1 selectedBuilding={selectedBuilding} />
-                    )}
-                    {activeTab === 'browniepoint2' && (
-                        <Browniepoint2 selectedBuilding={selectedBuilding} />
                     )}
                 </div>
             </main>
