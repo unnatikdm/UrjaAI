@@ -12,10 +12,9 @@ const USE_MOCK = !import.meta.env.VITE_API_BASE_URL
 
 const client = axios.create({
     baseURL: import.meta.env.VITE_API_BASE_URL || '',
-    timeout: 60000, // Increased to 120s to allow ML models to run inference
+    timeout: 60000,
 })
 
-// ── Request interceptor: attach JWT ──────────────────────────────────────────
 client.interceptors.request.use(config => {
     const token = getToken()
     if (token) {
@@ -24,7 +23,6 @@ client.interceptors.request.use(config => {
     return config
 })
 
-// ── Response interceptor: handle 401 ────────────────────────────────────────
 client.interceptors.response.use(
     res => res,
     err => {
@@ -78,8 +76,6 @@ export async function postWhatIf(buildingId, changes) {
     return data
 }
 
-// ── Sustainability Endpoints ──────────────────────────────────────────────
-
 export async function getWeather(hours = 48) {
     const { data } = await client.get(`/weather?hours=${hours}`)
     return data
@@ -107,8 +103,6 @@ export async function postCarbonImpact(energySaved) {
     return data
 }
 
-// ── RAG Deep Analysis Endpoints ───────────────────────────────────────────
-
 export async function getDeepRecommendations(buildingId, modifiers = null) {
     const payload = { building_id: buildingId }
     if (modifiers) {
@@ -128,7 +122,6 @@ export async function chatWithRecommendationAI(recommendation, message, chatHist
     return data
 }
 
-// Enhanced recommendations with real-time context
 export async function getEnhancedRecommendations(buildingId, includeBenchmarks = true, includeMultipleLevels = true) {
     const { data } = await client.get(`/enhanced/recommendations/${buildingId}`, {
         params: {
@@ -144,7 +137,7 @@ export async function getPricingContext() {
     return data
 }
 
-export async function getWeatherAlerts() {
+export async function getEnhancedWeatherAlerts() {
     const { data } = await client.get('/enhanced/weather/alerts')
     return data
 }
@@ -166,7 +159,6 @@ export async function calculateWhatIf(buildingId, currentSetpoint, newSetpoint, 
     return data
 }
 
-// Feedback system for continuous learning
 export async function submitFeedback(recommendationId, buildingId, wasHelpful, feedbackText = null, actualSavings = null, rating = null) {
     const { data } = await client.post('/rag/feedback', {
         recommendation_id: recommendationId,

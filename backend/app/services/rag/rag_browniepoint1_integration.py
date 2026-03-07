@@ -414,160 +414,450 @@ class RAGBrowniepoint1Integration:
         chat_history: Optional[List[Dict[str, str]]] = None
     ) -> Dict[str, Any]:
         """
-        Chat about a specific recommendation using RAG.
-        Provides direct answers to user questions.
+        Enhanced chat with dynamic context understanding and natural responses.
+        Understands user intent and provides contextual, flowing answers.
         """
         if chat_history is None:
             chat_history = []
         
-        # Search knowledge base for relevant info based on user question
-        search_query = f"{recommendation['action']} {user_message}"
+        # Analyze conversation context
+        conversation_context = self._analyze_conversation_context(chat_history, user_message)
+        
+        # Extract user intent with deeper understanding
+        intent = self._extract_user_intent(user_message, conversation_context)
+        
+        # Search knowledge base with context-aware query
+        search_query = self._build_contextual_search_query(recommendation, user_message, intent)
         relevant_docs = self.search_knowledge_base(search_query, top_k=3)
         
-        # Build knowledge context
-        knowledge_context = ""
-        sources = []
+        # Build knowledge context without duplication
+        knowledge_context = self._build_unique_knowledge_context(relevant_docs)
+        sources = list(set([doc.get('type', '') for doc in relevant_docs if doc.get('type')]))
         
-        for doc in relevant_docs:
-            doc_type = doc.get('type', '')
-            
-            if doc_type == 'weather_pattern':
-                condition = doc.get('condition', '')
-                impact = doc.get('impact', '')
-                if condition or impact:
-                    knowledge_context += f"Weather: {condition}. Impact: {impact}. "
-                    sources.append('weather_pattern')
-            
-            elif doc_type == 'recommendation_pattern':
-                outcome = doc.get('outcome', {})
-                success_rate = outcome.get('success_rate', 0) if outcome else 0
-                avg_savings = outcome.get('avg_savings_kwh', 0) if outcome else 0
-                if success_rate or avg_savings:
-                    knowledge_context += f"Historical success: {success_rate*100:.0f}%, avg savings {avg_savings} kWh. "
-                    sources.append('historical_pattern')
-        
-        # Generate direct answer
-        response = self._generate_direct_answer(
+        # Generate contextual, natural response
+        response = self._generate_contextual_response(
             user_message=user_message,
+            intent=intent,
             recommendation=recommendation,
             knowledge_context=knowledge_context,
+            conversation_context=conversation_context,
             chat_history=chat_history
         )
         
         return {
             'response': response,
-            'sources': list(set(sources)),
-            'relevant_docs_count': len(relevant_docs)
+            'sources': sources,
+            'relevant_docs_count': len(relevant_docs),
+            'detected_intent': intent.get('primary', 'general')
         }
     
-    def _generate_direct_answer(
+    def _analyze_conversation_context(self, chat_history: List[Dict[str, str]], current_message: str) -> Dict[str, Any]:
+        """Analyze the conversation flow and previous topics"""
+        context = {
+            'previous_topics': [],
+            'last_question_type': None,
+            'conversation_depth': len(chat_history) // 2,
+            'is_follow_up': False,
+            'referenced_values': []
+        }
+        
+        if not chat_history:
+            return context
+        
+        # Extract topics from previous exchanges
+        for msg in chat_history[-4:]:  # Look at last 4 messages
+            if msg.get('role') == 'user':
+                content = msg.get('content', '').lower()
+                if any(word in content for word in ['temperature', 'temp']):
+                    context['previous_topics'].append('temperature')
+                elif any(word in content for word in ['save', 'cost', 'money']):
+                    context['previous_topics'].append('savings')
+                elif any(word in content for word in ['occupancy', 'people']):
+                    context['previous_topics'].append('occupancy')
+                elif any(word in content for word in ['weather', 'rain', 'hot']):
+                    context['previous_topics'].append('weather')
+        
+        # Check if current message is a follow-up
+        current_lower = current_message.lower()
+        context['is_follow_up'] = (
+            len(current_message.split()) <= 6 and
+            (any(word in current_lower for word in ['what about', 'and', 'how about', 'also']) or
+             context['previous_topics'])
+        )
+        
+        # Extract referenced numbers/values
+        import re
+        numbers = re.findall(r'(\d+\.?\d*)', current_message)
+        context['referenced_values'] = [float(n) for n in numbers if float(n) < 1000]
+        
+        return context
+    
+    def _extract_user_intent(self, user_message: str, context: Dict) -> Dict[str, Any]:
+        """Extract detailed user intent from the message"""
+        msg_lower = user_message.lower()
+        
+        intent = {
+            'primary': 'general',
+            'sub_intent': None,
+            'entities': {},
+            'sentiment': 'neutral',
+            'urgency': 'normal'
+        }
+        
+        # Detect question type with context awareness
+        if any(word in msg_lower for word in ['why', 'reason', 'how come', 'what makes']):
+            intent['primary'] = 'explanation'
+        
+        elif any(phrase in msg_lower for phrase in ['what if', 'what happens', 'suppose', 'if i']):
+            intent['primary'] = 'what_if'
+            # Detect what-if sub-type
+            if any(word in msg_lower for word in ['temperature', 'temp', 'degree', '°c', 'setpoint']):
+                intent['sub_intent'] = 'temperature_change'
+            elif any(word in msg_lower for word in ['occupancy', 'people', 'crowd', 'staff']):
+                intent['sub_intent'] = 'occupancy_change'
+                # Detect direction
+                if any(word in msg_lower for word in ['decrease', 'less', 'fewer', 'down', 'reduce']):
+                    intent['entities']['direction'] = 'decrease'
+                elif any(word in msg_lower for word in ['increase', 'more', 'higher', 'up']):
+                    intent['entities']['direction'] = 'increase'
+            elif any(word in msg_lower for word in ['time', 'when', 'hour', 'schedule']):
+                intent['sub_intent'] = 'timing_change'
+        
+        elif any(word in msg_lower for word in ['how much', 'save', 'cost', 'money', 'price', 'dollar', '$', 'rs', 'inr', '₹']):
+            intent['primary'] = 'savings_inquiry'
+            # Detect time frame
+            if any(word in msg_lower for word in ['annual', 'year', 'yearly']):
+                intent['sub_intent'] = 'annual'
+            elif any(word in msg_lower for word in ['month', 'monthly']):
+                intent['sub_intent'] = 'monthly'
+            elif any(word in msg_lower for word in ['daily', 'day', 'per day']):
+                intent['sub_intent'] = 'daily'
+        
+        elif any(word in msg_lower for word in ['co2', 'carbon', 'environment', 'green', 'trees', 'pollution']):
+            intent['primary'] = 'environmental_impact'
+        
+        elif any(word in msg_lower for word in ['how', 'implement', 'do this', 'apply', 'setup', 'configure']):
+            intent['primary'] = 'implementation'
+        
+        elif any(word in msg_lower for word in ['when', 'time', 'best time', 'optimal']):
+            intent['primary'] = 'timing'
+        
+        elif any(word in msg_lower for word in ['weather', 'temperature', 'temp', 'hot', 'cold', 'rain']):
+            intent['primary'] = 'weather_inquiry'
+        
+        # Detect sentiment
+        if any(word in msg_lower for word in ['great', 'good', 'awesome', 'excellent', 'thanks']):
+            intent['sentiment'] = 'positive'
+        elif any(word in msg_lower for word in ['bad', 'terrible', 'useless', 'problem']):
+            intent['sentiment'] = 'negative'
+        
+        # Detect urgency
+        if any(word in msg_lower for word in ['urgent', 'asap', 'immediately', 'quick']):
+            intent['urgency'] = 'high'
+        
+        # Extract numerical entities
+        import re
+        numbers = re.findall(r'(\d+\.?\d*)', user_message)
+        if numbers:
+            intent['entities']['numbers'] = [float(n) for n in numbers]
+        
+        return intent
+    
+    def _build_contextual_search_query(self, recommendation: Dict, user_message: str, intent: Dict) -> str:
+        """Build a context-aware search query"""
+        query_parts = [recommendation.get('action', '')]
+        
+        # Add intent-based terms
+        if intent['primary'] == 'what_if':
+            if intent['sub_intent']:
+                query_parts.append(intent['sub_intent'])
+        elif intent['primary'] == 'savings_inquiry':
+            query_parts.append('savings cost money')
+        elif intent['primary'] == 'environmental_impact':
+            query_parts.append('CO2 carbon environment')
+        elif intent['primary'] == 'implementation':
+            query_parts.append('implement how to steps')
+        
+        query_parts.append(user_message)
+        
+        return ' '.join(query_parts)
+    
+    def _build_unique_knowledge_context(self, docs: List[Dict]) -> str:
+        """Build knowledge context without duplication"""
+        seen_content = set()
+        context_parts = []
+        
+        for doc in docs:
+            doc_type = doc.get('type', '')
+            
+            if doc_type == 'weather_pattern':
+                condition = doc.get('condition', '')
+                impact = doc.get('impact', '')
+                content_key = f"weather_{condition}_{impact}"
+                if content_key not in seen_content and (condition or impact):
+                    seen_content.add(content_key)
+                    context_parts.append(f"Weather condition: {condition}. Impact: {impact}")
+            
+            elif doc_type == 'recommendation_pattern':
+                outcome = doc.get('outcome', {})
+                success_rate = outcome.get('success_rate', 0) if outcome else 0
+                avg_savings = outcome.get('avg_savings_kwh', 0) if outcome else 0
+                content_key = f"rec_{success_rate}_{avg_savings}"
+                if content_key not in seen_content and (success_rate or avg_savings):
+                    seen_content.add(content_key)
+                    context_parts.append(f"Historical: {success_rate*100:.0f}% success, avg {avg_savings} kWh savings")
+            
+            elif doc_type == 'shap_explanation':
+                explanation = doc.get('explanation', '')
+                feature = doc.get('feature', '')
+                content_key = f"shap_{feature}_{explanation[:50]}"
+                if content_key not in seen_content and explanation:
+                    seen_content.add(content_key)
+                    context_parts.append(f"AI analysis: {explanation}")
+        
+        return ' | '.join(context_parts)
+    
+    def _generate_contextual_response(
         self,
         user_message: str,
-        recommendation: Dict[str, Any],
+        intent: Dict,
+        recommendation: Dict,
         knowledge_context: str,
+        conversation_context: Dict,
         chat_history: List[Dict[str, str]]
     ) -> str:
-        """Generate a direct, contextual answer to the user's question"""
+        """Generate a contextual, natural response based on intent and conversation"""
         
-        msg_lower = user_message.lower()
-        action = recommendation.get('action', 'this recommendation')
-        savings_kwh = recommendation.get('savings_kwh', 0)
-        savings_cost = recommendation.get('savings_cost_inr', 0)
-        priority = recommendation.get('priority', 'medium')
+        # Handle follow-up questions specially
+        if conversation_context['is_follow_up'] and conversation_context['previous_topics']:
+            return self._handle_follow_up_response(
+                user_message, intent, recommendation, conversation_context, chat_history
+            )
         
-        # Check for "why" questions
-        if any(word in msg_lower for word in ['why', 'reason', 'how come', 'what makes']):
-            return self._answer_why_question(action, recommendation, knowledge_context)
+        # Route to appropriate response generator based on intent
+        if intent['primary'] == 'what_if':
+            return self._generate_what_if_response(intent, recommendation, conversation_context)
         
-        # Check for "how much" / savings questions
-        if any(phrase in msg_lower for phrase in ['how much', 'save', 'cost', 'money', 'price', 'savings']):
-            return self._answer_savings_question(action, savings_kwh, savings_cost, knowledge_context)
+        elif intent['primary'] == 'savings_inquiry':
+            return self._generate_savings_response(intent, recommendation)
         
-        # Check for "what if" / scenario questions
-        if any(phrase in msg_lower for phrase in ['what if', 'what happens', 'if i', 'suppose', 'change', 'increase', 'decrease']):
-            return self._answer_what_if_question(action, user_message, recommendation, knowledge_context)
+        elif intent['primary'] == 'explanation':
+            return self._generate_explanation_response(recommendation, knowledge_context)
         
-        # Check for weather/temperature questions
-        if any(word in msg_lower for word in ['weather', 'temperature', 'temp', 'hot', 'cold', 'rain', 'sunny']):
-            return self._answer_weather_question(action, recommendation, knowledge_context)
+        elif intent['primary'] == 'environmental_impact':
+            return self._generate_environmental_response(recommendation)
         
-        # Check for "when" / timing questions
-        if any(word in msg_lower for word in ['when', 'time', 'hour', 'night', 'day', 'evening', 'morning', 'peak']):
-            return self._answer_timing_question(action, recommendation, knowledge_context)
+        elif intent['primary'] == 'implementation':
+            return self._generate_implementation_response(recommendation)
         
-        # Check for "how" / implementation questions
-        if any(word in msg_lower for word in ['how', 'implement', 'do this', 'apply', 'setup']):
-            return self._answer_how_question(action, recommendation, knowledge_context)
+        elif intent['primary'] == 'timing':
+            return self._generate_timing_response(recommendation)
         
-        # Default: Direct answer about the recommendation
-        return self._answer_general_question(action, recommendation, knowledge_context)
-    
-    def _answer_why_question(self, action: str, rec: Dict, kb: str) -> str:
-        """Answer why this recommendation is given"""
-        reason = rec.get('reason', '')
-        savings = rec.get('savings_kwh', 0)
-        
-        response = f"**Why: {action}**\n\n"
-        
-        if 'precool' in action.lower() or 'pre-cool' in action.lower():
-            response += "This uses **thermal mass** to your advantage.\n\n"
-            response += "**The Science:**\n"
-            response += f"• Buildings store heat in walls/floors (thermal mass)\n"
-            response += f"• Pre-cooling at night (₹4-6/kWh) charges this mass with coolness\n"
-            response += f"• During day, building resists heating, delaying HVAC startup\n"
-            response += f"• You avoid peak rates (₹10-12/kWh during 4-8 PM)\n\n"
-            response += f"**Benefit:** {savings} kWh shifted from peak to off-peak"
-        
-        elif 'shift' in action.lower():
-            response += "This leverages **time-of-use pricing**.\n\n"
-            response += "**The Economics:**\n"
-            response += f"• Electricity varies 3x daily\n"
-            response += f"• Peak (4-8 PM): ₹10-12/kWh\n"
-            response += f"• Off-peak (10 PM-6 AM): ₹4-6/kWh\n"
-            response += f"• Shifting non-critical loads saves 50% per kWh\n\n"
-            response += f"**Benefit:** {savings} kWh at cheaper rates"
-        
-        elif 'solar' in action.lower():
-            response += "This maximizes **free solar energy**.\n\n"
-            response += "**The Opportunity:**\n"
-            response += f"• Solar peaks 10 AM - 2 PM\n"
-            response += f"• Every kWh used then is essentially free\n"
-            response += f"• Run high-consumption devices during solar peak\n\n"
-            response += f"**Benefit:** {savings} kWh of solar offset"
+        elif intent['primary'] == 'weather_inquiry':
+            return self._generate_weather_response(recommendation, knowledge_context)
         
         else:
-            response += f"**Why this matters:**\n"
-            response += f"• Addresses specific energy consumption pattern\n"
-            response += f"• Expected savings: {savings} kWh\n"
-            if reason:
-                response += f"• {reason[:150]}\n"
-        
-        return response
+            return self._generate_general_response(recommendation, chat_history)
     
-    def _answer_savings_question(self, action: str, savings_kwh: float, savings_cost: float, kb: str) -> str:
-        """Answer how much this saves"""
-        response = f"**💰 Savings: {action}**\n\n"
+    def _handle_follow_up_response(
+        self,
+        user_message: str,
+        intent: Dict,
+        recommendation: Dict,
+        context: Dict,
+        chat_history: List[Dict[str, str]]
+    ) -> str:
+        """Handle follow-up questions naturally"""
+        last_topic = context['previous_topics'][-1] if context['previous_topics'] else 'general'
+        values = context['referenced_values']
         
-        if savings_kwh > 0:
-            response += f"**Per Use:**\n"
-            response += f"• {savings_kwh} kWh saved\n"
-            response += f"• ₹{savings_cost:.0f} saved\n"
-            response += f"• Rate: ₹{savings_cost/savings_kwh:.1f}/kWh\n\n"
+        if last_topic == 'temperature' and values:
+            return self._generate_temperature_follow_up(values[0], intent, recommendation)
+        
+        elif last_topic == 'occupancy':
+            direction = intent.get('entities', {}).get('direction', 'increase')
+            return self._generate_occupancy_follow_up(direction, recommendation)
+        
+        elif last_topic == 'savings':
+            return self._generate_savings_follow_up(intent, recommendation)
+        
+        return self._generate_general_response(recommendation, chat_history)
+    
+    def _generate_what_if_response(self, intent: Dict, rec: Dict, context: Dict) -> str:
+        """Generate natural what-if scenario response"""
+        action = rec.get('action', 'this recommendation')
+        
+        if intent['sub_intent'] == 'temperature_change':
+            numbers = intent.get('entities', {}).get('numbers', [])
+            if numbers:
+                change = numbers[0]
+                direction = intent.get('entities', {}).get('direction', 'increase')
+                
+                # Calculate impact (simplified)
+                energy_per_degree = 2.5  # kWh per degree change
+                if direction == 'increase':
+                    energy_impact = change * energy_per_degree
+                    cost_impact = energy_impact * 8
+                    
+                    return f"If you increase the temperature by {change}°C, you'd actually use **more energy** - about {energy_impact:.1f} kWh extra. This would cost you approximately ₹{cost_impact:.0f} more.\n\nInstead of raising the temperature, consider using fans or improving insulation to maintain comfort without increasing your energy bill."
+                else:
+                    energy_saved = change * energy_per_degree
+                    cost_saved = energy_saved * 8
+                    
+                    return f"Decreasing the temperature by {change}°C could save you around {energy_saved:.1f} kWh, which translates to about ₹{cost_saved:.0f} per application.\n\nHowever, make sure this doesn't compromise occupant comfort. You might want to try this during off-peak hours first to test the impact."
+        
+        elif intent['sub_intent'] == 'occupancy_change':
+            direction = intent.get('entities', {}).get('direction', 'increase')
             
-            annual_kwh = savings_kwh * 365
-            annual_cost = annual_kwh * 8
-            response += f"**Annual (daily use):**\n"
-            response += f"• {annual_kwh:,.0f} kWh/year\n"
-            response += f"• ₹{annual_cost:,.0f}/year\n"
-            response += f"• CO₂: ~{annual_kwh * 0.85:.0f} kg less\n\n"
+            if direction == 'decrease':
+                return f"With fewer people in the building, you'd actually have **lower internal heat gains** - each person generates about 100W of heat.\n\nThis means your HVAC system won't have to work as hard to maintain comfort. Your savings potential remains similar, but the baseline energy consumption decreases, so your total bill would be lower.\n\nThis is actually a great time to be more aggressive with your energy-saving strategies since there's less heat to manage."
+            else:
+                return f"More occupancy means more internal heat (about 100W per person) and higher ventilation requirements. Your HVAC system will need to work 8-12% harder.\n\nThe good news? Your recommended savings amount stays the same, so you're still saving the same amount of energy - it's just from a higher baseline. Consider using occupancy-based zoning to only condition the occupied areas."
         
-        response += f"**Comparison:**\n"
-        response += f"• Powers {int(savings_kwh/0.3)} LEDs for 24h\n"
-        response += f"• Charges {(savings_kwh * 1000 / 15):.0f} phones\n\n"
+        return f"Let me help you explore what happens if conditions change for **{action}**. What specific scenario are you thinking about?"
+    
+    def _generate_savings_response(self, intent: Dict, rec: Dict) -> str:
+        """Generate natural savings response with proper calculations"""
+        savings_kwh = rec.get('savings_kwh', 0)
+        savings_cost = rec.get('savings_cost_inr', 0)
+        action = rec.get('action', 'this recommendation')
         
-        response += f"**Maximize by:**\n"
-        response += f"1. Apply consistently\n"
-        response += f"2. Automate if possible\n"
+        # Determine time frame
+        timeframe = intent.get('sub_intent', 'general')
+        
+        if timeframe == 'annual':
+            annual_kwh = savings_kwh * 261  # Weekdays per year
+            annual_cost = savings_cost * 261
+            co2_saved = annual_kwh * 0.85
+            
+            return f"Over a full year of consistent use (about 261 weekdays), **{action}** could save you approximately:\n\n• **{annual_kwh:.0f} kWh** of electricity\n• **₹{annual_cost:.0f}** in energy costs\n• **{co2_saved:.0f} kg** of CO₂ emissions\n\nThat's equivalent to the carbon absorption of about {(co2_saved/22):.1f} trees over a year, or not driving a car for {(co2_saved/0.12):.0f} kilometers."
+        
+        elif timeframe == 'monthly':
+            monthly_kwh = savings_kwh * 20  # ~20 weekdays
+            monthly_cost = savings_cost * 20
+            
+            return f"Applied consistently over a month (about 20 weekdays), you'd save approximately:\n\n• **{monthly_kwh:.0f} kWh**\n• **₹{monthly_cost:.0f}**\n\nPlus, if this reduces your peak demand by even 0.5 kW, you'd save an additional ₹100 in demand charges, bringing your total monthly savings to around ₹{monthly_cost + 100:.0f}."
+        
+        else:
+            return f"For **{action}**, each time you apply this recommendation:\n\n• You save **{savings_kwh} kWh** of electricity\n• Which saves you **₹{savings_cost:.0f}** at current rates\n• And prevents **{savings_kwh * 0.85:.1f} kg** of CO₂ emissions\n\nTo maximize these savings:\n1. **Automate it** - Set up your BMS to apply this automatically\n2. **Be consistent** - Daily application compounds the savings\n3. **Track it** - Compare your actual usage to see the real impact\n\nWant to know the annual projection or see what happens under different conditions?"
+    
+    def _generate_explanation_response(self, rec: Dict, kb: str) -> str:
+        """Generate natural explanation response"""
+        action = rec.get('action', 'this action')
+        reason = rec.get('reason', '')
+        
+        if 'precool' in action.lower() or 'pre-cool' in action.lower():
+            return f"**Why pre-cooling works:**\n\nThink of your building like a thermal battery. At night (10 PM - 6 AM), electricity is cheaper (₹4-6/kWh vs ₹10-12/kWh during peak), and outdoor temperatures are lower.\n\nBy pre-cooling during these off-peak hours, you're 'charging' the building's thermal mass with coolness. During the day, this stored coolness helps resist heat gain, delaying when your HVAC needs to kick in - and avoiding those expensive peak hours (4-8 PM).\n\nIt's like filling up your car with cheap fuel at night so you don't have to buy expensive fuel during rush hour."
+        
+        elif 'shift' in action.lower() or 'load' in action.lower():
+            return f"**The economics of load shifting:**\n\nElectricity rates vary dramatically throughout the day. Peak hours (4-8 PM) cost ₹10-12/kWh, while off-peak (10 PM - 6 AM) is only ₹4-6/kWh.\n\nThis recommendation identifies non-critical loads - things like water heaters, EV chargers, and dishwashers - that can run during cheaper hours without affecting operations.\n\nBy simply changing WHEN these devices run (not IF they run), you save up to 50% on the energy they consume. No comfort loss, no operational changes - just smarter timing."
+        
+        else:
+            return f"**Why this helps:** {reason}\n\nThis recommendation addresses a specific inefficiency in your building's energy profile. {kb[:150] if kb else ''}"
+    
+    def _generate_environmental_response(self, rec: Dict) -> str:
+        """Generate environmental impact response"""
+        savings_kwh = rec.get('savings_kwh', 0)
+        co2_per_kwh = 0.85
+        trees_per_year = 22
+        
+        co2_saved = savings_kwh * co2_per_kwh
+        trees_equivalent = co2_saved / trees_per_year
+        car_km = co2_saved / 0.12
+        
+        annual_co2 = co2_saved * 365
+        annual_trees = annual_co2 / trees_per_year
+        
+        return f"**Your environmental impact from this action:**\n\nEach time you apply this recommendation, you prevent **{co2_saved:.1f} kg** of CO₂ from entering the atmosphere. That's roughly the same as:\n\n• Planting **{trees_equivalent:.2f}** trees\n• Not driving a car for **{car_km:.0f} kilometers**\n• Charging **{(savings_kwh * 1000 / 15):.0f}** smartphones\n\n**Over a full year** of daily use:\n• **{annual_co2:.0f} kg** CO₂ saved\n• Equivalent to **{annual_trees:.1f}** trees worth of carbon absorption\n• Like taking a car off the road for **{(annual_co2 / 0.12 / 1000):.0f}** kilometers\n\nSmall actions, when repeated, create significant environmental impact."
+    
+    def _generate_implementation_response(self, rec: Dict) -> str:
+        """Generate implementation guidance response"""
+        action = rec.get('action', 'this action')
+        
+        if 'precool' in action.lower():
+            return f"**How to implement pre-cooling in your BMS:**\n\n**Option 1: Automated (Recommended)**\n1. Access your BMS → Scheduling → HVAC → Setpoint Control\n2. Create a daily schedule: 10:00 PM - 6:00 AM, setpoint 22-23°C\n3. Set 6:00 AM - 10:00 PM, setpoint 25-26°C\n4. Enable auto-revert\n\n**Option 2: Manual**\n• At 10 PM: Lower setpoint to 22°C\n• At 6 AM: Raise setpoint to 25°C\n• Repeat daily during hot weather\n\n**Setup time:** ~15 minutes\n**Payback:** Immediate\n\nAfter a week, check your energy dashboard to see the actual savings compared to similar days before implementation."
+        
+        elif 'shift' in action.lower():
+            return f"""**How to shift your loads:**
+
+**Identify shiftable loads:**
+• Water heaters
+• EV chargers
+• Dishwashers
+• Pool pumps
+• Battery storage systems
+
+**For each device:**
+1. Check if it has a delay-start feature
+2. Set it to start after 10 PM
+3. For EVs: Charge overnight instead of right after work
+4. For water heaters: Heat water at night, insulated tank keeps it hot
+
+**Smart plugs** can automate this for devices without built-in timers.
+
+**Expected result:** 30-50% cost reduction on shifted loads."""
+        
+        else:
+            return f"**Implementation steps for {action}:**\n\n1. **Review** the recommendation details and verify it applies to your setup\n2. **Plan** when to implement - start during low-occupancy periods for testing\n3. **Execute** - Make the change incrementally if possible\n4. **Monitor** - Track energy use for 1-2 weeks\n5. **Adjust** - Fine-tune based on actual results and feedback\n\nNeed specific BMS instructions? Let me know your system type (Siemens, Honeywell, Johnson Controls, etc.)."
+    
+    def _generate_timing_response(self, rec: Dict) -> str:
+        """Generate timing guidance response"""
+        action = rec.get('action', 'this action')
+        
+        if 'precool' in action.lower():
+            return f"**Optimal timing for pre-cooling:**\n\n**Best window:** 10:00 PM - 6:00 AM (Off-peak)\n\n**Why this time?**\n• Cheapest electricity rates: ₹4-6/kWh\n• Cooler outdoor temperatures make cooling more efficient\n• Building typically unoccupied - no comfort complaints\n• Less strain on the electrical grid\n\n**Avoid:** 4:00 PM - 8:00 PM (Peak rates: ₹10-12/kWh)\n\n**Duration:** 4-6 hours of pre-cooling is typically sufficient to charge the building's thermal mass.\n\nDuring a heatwave (>35°C), consider starting 2-3 hours earlier than usual."
+        
+        else:
+            return f"**Best timing for {action}:**\n\n**Off-peak hours (10 PM - 6 AM):** Lowest rates, minimal grid stress\n**Standard hours (6 AM - 4 PM, 8 PM - 10 PM):** Moderate rates\n**Peak hours (4 PM - 8 PM):** Highest rates - avoid if possible\n\nYour specific recommendation is optimized for the current conditions. Shifting it to peak hours would reduce savings by 30-40%, while moving to off-peak could increase savings by 20-25%."
+    
+    def _generate_weather_response(self, rec: Dict, kb: str) -> str:
+        """Generate weather-aware response"""
+        return f"**Weather impact on this recommendation:**\n\n🌤️ **Sunny/Clear Days (Best conditions)**\n• Pre-cooling is highly effective\n• Solar generation peaks 10 AM - 2 PM\n• Maximum savings potential\n\n☁️ **Cloudy/Rainy Days**\n• Solar generation drops 40-70%\n• Higher humidity increases HVAC load\n• Recommendation becomes MORE valuable (higher baseline consumption)\n\n🔥 **Hot Days (>35°C)**\n• HVAC stress increases 15-25%\n• Start pre-cooling 2-3 hours earlier\n• Target 23-24°C instead of 22°C\n\n❄️ **Cold Days (<20°C)**\n• Pre-cooling less relevant\n• Consider pre-heating during off-peak instead\n\n{kb if kb else 'Current weather conditions suggest this is a good time to apply this recommendation.'}"
+    
+    def _generate_general_response(self, rec: Dict, chat_history: List[Dict[str, str]]) -> str:
+        """Generate natural general response"""
+        action = rec.get('action', 'this action')
+        savings_kwh = rec.get('savings_kwh', 0)
+        savings_cost = rec.get('savings_cost_inr', 0)
+        
+        # Check conversation depth for contextual opening
+        depth = len(chat_history) // 2
+        
+        if depth == 0:
+            opening = f"I can help you understand **{action}** better."
+        elif depth == 1:
+            opening = f"Continuing our discussion about {action}:"
+        else:
+            opening = "Building on what we've covered:"
+        
+        return f"{opening}\n\nThis recommendation saves **{savings_kwh} kWh** (₹{savings_cost:.0f}) per application by optimizing when and how your building uses energy.\n\n**What would you like to know?**\n• How much you could save annually\n• Why this specific timing is recommended\n• What happens if conditions change\n• How to implement it in your BMS\n• The environmental impact"
+    
+    def _generate_temperature_follow_up(self, temp_change: float, intent: Dict, rec: Dict) -> str:
+        """Handle temperature-related follow-up"""
+        action = rec.get('action', '')
+        
+        if 'decrease' in str(intent).lower() or temp_change < 0:
+            return f"With a {abs(temp_change)}°C decrease, you're looking at roughly {(abs(temp_change) * 2.5):.1f} kWh more saved per session. That translates to about ₹{(abs(temp_change) * 2.5 * 8):.0f} additional savings.\n\nJust keep an eye on comfort levels - if people start wearing sweaters indoors, you might have gone too far!"
+        else:
+            return f"An increase of {temp_change}°C would add about {(temp_change * 2.5):.1f} kWh to your consumption, costing roughly ₹{(temp_change * 2.5 * 8):.0f} extra.\n\nInstead of raising the temperature, try using ceiling fans or improving your building's insulation."
+    
+    def _generate_occupancy_follow_up(self, direction: str, rec: Dict) -> str:
+        """Handle occupancy-related follow-up"""
+        if direction == 'decrease':
+            return f"With fewer people, your internal heat load drops. Each person removed saves about 100W of heat that your HVAC doesn't have to remove.\n\nThis actually makes your energy-saving strategies more effective - there's less 'background' heat to overcome. Your percentage savings might even improve!"
+        else:
+            return f"More people means more heat to manage. Each additional person adds roughly 100W of body heat plus equipment use.\n\nYour HVAC will work harder, but your actual savings amount stays constant. The key is that you're saving the same amount from a higher baseline, so your percentage efficiency improves."
+    
+    def _generate_savings_follow_up(self, intent: Dict, rec: Dict) -> str:
+        """Handle savings-related follow-up"""
+        savings_kwh = rec.get('savings_kwh', 0)
+        
+        timeframe = intent.get('sub_intent', 'general')
+        if timeframe == 'annual':
+            return f"Annually, you're looking at approximately {savings_kwh * 261:.0f} kWh and ₹{savings_kwh * 8 * 261:.0f} in savings if applied consistently. That's like getting a free month of electricity!"
+        else:
+            return f"Monthly, with about 20 weekdays, you'd save roughly {savings_kwh * 20:.1f} kWh and ₹{savings_kwh * 8 * 20:.0f}. Not bad for a simple scheduling change!"
+    
         response += f"3. Track actual savings"
         
         return response

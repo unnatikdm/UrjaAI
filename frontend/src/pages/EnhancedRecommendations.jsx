@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { 
     getEnhancedRecommendations, 
     getPricingContext, 
-    getWeatherAlerts,
+    getEnhancedWeatherAlerts,
     getOccupancy,
     submitFeedback
 } from '../services/api'
@@ -140,7 +140,7 @@ export default function EnhancedRecommendations() {
                 const [recsData, pricingData, weatherData, occupancyData] = await Promise.all([
                     getEnhancedRecommendations(buildingId),
                     getPricingContext(),
-                    getWeatherAlerts(),
+                    getEnhancedWeatherAlerts(),
                     getOccupancy(buildingId)
                 ])
 
