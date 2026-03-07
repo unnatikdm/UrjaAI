@@ -71,17 +71,28 @@ export default function RecommendationsPanel({ recommendations, buildingId }) {
                 ))}
             </div>
 
-            <div className="mt-6 pt-4 border-t border-border flex items-center justify-between">
+            <div className="mt-6 pt-4 border-t border-border flex items-center justify-between flex-wrap gap-2">
                 <p className="text-xs text-ink-muted">Want more detailed AI analysis?</p>
-                <button
-                    onClick={() => navigate(`/deep-recommendations/${buildingId}`)}
-                    className="btn-primary py-1.5 px-3 text-xs flex items-center gap-1.5"
-                >
-                    Wanna check deeper?
-                    <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                    </svg>
-                </button>
+                <div className="flex gap-2">
+                    <button
+                        onClick={() => navigate(`/deep-recommendations/${buildingId}`)}
+                        className="btn-primary py-1.5 px-3 text-xs flex items-center gap-1.5"
+                    >
+                        Wanna check deeper?
+                        <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                        </svg>
+                    </button>
+                    <button
+                        onClick={() => navigate(`/enhanced-recommendations/${buildingId}`)}
+                        className="btn-secondary py-1.5 px-3 text-xs flex items-center gap-1.5 bg-green-50 border-green-200 text-green-700 hover:bg-green-100"
+                    >
+                        ✨ Smart Recs
+                        <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        </svg>
+                    </button>
+                </div>
             </div>
         </div>
     )

@@ -127,3 +127,59 @@ export async function chatWithRecommendationAI(recommendation, message, chatHist
     })
     return data
 }
+
+// Enhanced recommendations with real-time context
+export async function getEnhancedRecommendations(buildingId, includeBenchmarks = true, includeMultipleLevels = true) {
+    const { data } = await client.get(`/enhanced/recommendations/${buildingId}`, {
+        params: {
+            include_benchmarks: includeBenchmarks,
+            include_multiple_levels: includeMultipleLevels
+        }
+    })
+    return data
+}
+
+export async function getPricingContext() {
+    const { data } = await client.get('/enhanced/pricing/context')
+    return data
+}
+
+export async function getWeatherAlerts() {
+    const { data } = await client.get('/enhanced/weather/alerts')
+    return data
+}
+
+export async function getOccupancy(buildingId) {
+    const { data } = await client.get(`/enhanced/occupancy/${buildingId}`)
+    return data
+}
+
+export async function calculateWhatIf(buildingId, currentSetpoint, newSetpoint, outdoorTemp, occupancyCount, durationHours = 3) {
+    const { data } = await client.post('/rag/what-if', {
+        building_id: buildingId,
+        current_setpoint: currentSetpoint,
+        proposed_setpoint: newSetpoint,
+        outdoor_temp: outdoorTemp,
+        occupancy_count: occupancyCount,
+        duration_hours: durationHours
+    })
+    return data
+}
+
+// Feedback system for continuous learning
+export async function submitFeedback(recommendationId, buildingId, wasHelpful, feedbackText = null, actualSavings = null, rating = null) {
+    const { data } = await client.post('/rag/feedback', {
+        recommendation_id: recommendationId,
+        building_id: buildingId,
+        was_helpful: wasHelpful,
+        feedback_text: feedbackText,
+        actual_savings_kwh: actualSavings,
+        rating: rating
+    })
+    return data
+}
+
+export async function getFeedbackStats() {
+    const { data } = await client.get('/rag/feedback/stats')
+    return data
+}
