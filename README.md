@@ -69,19 +69,6 @@ UrjaAI/
     │   └── services/            # Axios API layer with Token Interceptors
 ```
 
----
-
-## 🌐 Deploying to v0
-
-To host the frontend on **v0**, follow these steps:
-
-1.  **Export Components**: Ensure all components in `frontend/src/components` are clean and isolated.
-2.  **Vite Build**: Run `npm run build` to generate the production `dist/` folder.
-3.  **v0 Import**: Upload the `frontend/` directory to your v0 project.
-4.  **API Connection**: Set the `VITE_API_BASE_URL` environment variable in the v0 dashboard to point to your hosted backend (e.g., `https://your-api.railway.app`).
-
----
-
 ## 🛠️ Tech Stack
 
 *   **Frontend**: React 18, Vite, Tailwind CSS, Recharts, Framer Motion.
