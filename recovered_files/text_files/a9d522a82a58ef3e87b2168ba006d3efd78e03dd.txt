@@ -1,0 +1,4 @@
+--- Database Full Stats ---
+Metadata Rows: 5624
+Sensor Readings: 65332832
+Unique Parquet Files Loaded: 37011

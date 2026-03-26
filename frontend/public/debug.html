@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Debug Frontend</title>
+</head>
+<body>
+    <h1>Frontend Debug</h1>
+    <div id="debug-info"></div>
+    
+    <script>
+        // Check if environment variables are loaded
+        const apiUrl = import.meta.env.VITE_API_BASE_URL;
+        const debugInfo = document.getElementById('debug-info');
+        
+        debugInfo.innerHTML = `
+            <h2>Environment Variables:</h2>
+            <p><strong>VITE_API_BASE_URL:</strong> ${apiUrl || 'NOT SET'}</p>
+            <p><strong>USE_MOCK:</strong> ${!apiUrl ? 'TRUE (using mock data)' : 'FALSE (using real API)'}</p>
+            
+            <h2>Testing API Connection:</h2>
+            <button onclick="testAPI()">Test API Connection</button>
+            <div id="api-result"></div>
+        `;
+        
+        async function testAPI() {
+            const resultDiv = document.getElementById('api-result');
+            
+            if (!apiUrl) {
+                resultDiv.innerHTML = '<p style="color: red;">❌ API URL not set - frontend will use mock data</p>';
+                return;
+            }
+            
+            try {
+                // Test login
+                const loginResponse = await fetch(`${apiUrl}/auth/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username: 'admin', password: 'urjaai123' })
+                });
+                
+                if (loginResponse.ok) {
+                    const loginData = await loginResponse.json();
+                    const token = loginData.access_token;
+                    
+                    // Test deep recommendations
+                    const deepResponse = await fetch(`${apiUrl}/rag/deep-recommendations`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`
+                        },
+                        body: JSON.stringify({ building_id: 'admin_block' })
+                    });
+                    
+                    resultDiv.innerHTML = `
+                        <p style="color: green;">✅ Login successful</p>
+                        <p style="color: green;">✅ Deep Recommendations: ${deepResponse.status}</p>
+                        <p>Response preview: ${await deepResponse.text()}</p>
+                    `;
+                } else {
+                    resultDiv.innerHTML = `<p style="color: red;">❌ Login failed: ${loginResponse.status}</p>`;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `<p style="color: red;">❌ Error: ${error.message}</p>`;
+            }
+        }
+    </script>
+</body>
+</html>

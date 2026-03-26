@@ -1,0 +1,32 @@
+[
+    {
+        "id": "REC_17",
+        "type": "Peak Shifting",
+        "impact": "High",
+        "description": "Anticipated peak of 4.24 kW at 07:00 (2025-08-01). Suggest shifting 0.85 kW (20%) of non-critical load (HVAC pre-cooling/Charging) to off-peak hours (02:00-05:00).",
+        "justification": "This peak is 0.7% higher than your operational average. Temperature at this hour is forecasted at 27.1\u00b0C, which is a primary driver for increased HVAC demand.",
+        "estimated_savings_usd": 0.08,
+        "suggested_time_window": "02:00 AM - 05:00 AM",
+        "action": "Automate HVAC pre-cooling at 2025-08-01 03:00"
+    },
+    {
+        "id": "REC_21",
+        "type": "Peak Shifting",
+        "impact": "High",
+        "description": "Anticipated peak of 4.22 kW at 11:00 (2025-08-01). Suggest shifting 0.84 kW (20%) of non-critical load (HVAC pre-cooling/Charging) to off-peak hours (02:00-05:00).",
+        "justification": "This peak is 0.2% higher than your operational average. Temperature at this hour is forecasted at 27.1\u00b0C, which is a primary driver for increased HVAC demand.",
+        "estimated_savings_usd": 0.08,
+        "suggested_time_window": "02:00 AM - 05:00 AM",
+        "action": "Automate HVAC pre-cooling at 2025-08-01 03:00"
+    },
+    {
+        "id": "REC_22",
+        "type": "Peak Shifting",
+        "impact": "High",
+        "description": "Anticipated peak of 4.22 kW at 12:00 (2025-08-01). Suggest shifting 0.84 kW (20%) of non-critical load (HVAC pre-cooling/Charging) to off-peak hours (02:00-05:00).",
+        "justification": "This peak is 0.2% higher than your operational average. Temperature at this hour is forecasted at 27.1\u00b0C, which is a primary driver for increased HVAC demand.",
+        "estimated_savings_usd": 0.08,
+        "suggested_time_window": "02:00 AM - 05:00 AM",
+        "action": "Automate HVAC pre-cooling at 2025-08-01 03:00"
+    }
+]

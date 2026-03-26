@@ -1,0 +1,52 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.env
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+env/
+
+# Database — never commit this (contains user data)
+*.db
+*.sqlite
+*.sqlite3
+
+
+# Node / Frontend
+node_modules/
+dist/
+.env
+.env.local
+.env.production
+
+# Vite
+frontend/dist/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Misc
+*.log
+
+# Databases & Data
+*.db
+*.sqlite
+*.sqlite3
+backend/urjaai.db
+
+# ML Artifacts & Big Data
+*.joblib
+*.parquet
+backend/app/models/
+backend/data/parquet/
+recovered_files/parquet_files/

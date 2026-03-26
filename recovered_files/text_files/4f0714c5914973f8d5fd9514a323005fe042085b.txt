@@ -1,0 +1,10 @@
+# Copy this file to .env and fill in the values
+# Server
+PORT=8000
+ALLOWED_ORIGINS=http://localhost:5173
+
+# JWT — CHANGE THIS to a long random string before deploying!
+JWT_SECRET=urjaai-super-secret-key-change-in-production
+
+# Database
+DATABASE_URL=sqlite:///./urja.db

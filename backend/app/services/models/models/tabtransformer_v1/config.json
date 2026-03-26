@@ -1,0 +1,20 @@
+{
+  "embedding_dim": 16,
+  "depth": 6,
+  "heads": 8,
+  "attn_dropout": 0.2,
+  "ff_dropout": 0.2,
+  "mlp_hidden_factors": [
+    4,
+    2
+  ],
+  "learning_rate": 0.0001,
+  "weight_decay": 0.01,
+  "batch_size": 64,
+  "epochs": 100,
+  "patience": 15,
+  "test_size": 0.2,
+  "val_size": 0.1,
+  "model_dir": "models",
+  "experiment_name": "coil2000_tabtransformer"
+}
