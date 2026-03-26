@@ -8,7 +8,7 @@ import {
     MOCK_BUILDINGS,
 } from './mockData'
 
-const USE_MOCK = !import.meta.env.VITE_API_BASE_URL
+const USE_MOCK = !import.meta.env.PROD && !import.meta.env.VITE_API_BASE_URL
 
 const client = axios.create({
     baseURL: import.meta.env.VITE_API_BASE_URL || '',
