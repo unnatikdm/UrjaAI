@@ -1,0 +1,4 @@
+building_id,type,capacity,floor_area_sqm
+academic_1,lecture,500,5000
+library,library,300,3000
+dorm_boys,dorm,800,12000

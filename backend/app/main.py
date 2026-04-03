@@ -11,6 +11,7 @@ from app.routers import predict, recommendations, explain, whatif, rag
 from app.routers import auth as auth_router
 from app.routers import ingest as ingest_router
 from app.routers import enhanced_recommendations
+from app.routers import anomalies
 from app.services.scheduler import create_scheduler
 from app.routers import sustainability
 from app.routers import browniepoint1
@@ -90,6 +91,7 @@ app.include_router(browniepoint1.router)
 # app.include_router(rag.router)
 app.include_router(rag_integration.router)
 app.include_router(enhanced_recommendations.router)
+app.include_router(anomalies.router)
 
 
 @app.get("/", tags=["Health"])

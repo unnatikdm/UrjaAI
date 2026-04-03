@@ -1,0 +1,86 @@
+{
+    "dorm_break": {
+        "mean_residual": 0.01764533267649522,
+        "std_residual": 5.6579462717319755,
+        "sigma_multiplier": 2.0,
+        "upper_threshold": 11.333537876140447,
+        "lower_threshold": -11.298247210787455
+    },
+    "dorm_exam_period": {
+        "mean_residual": 0.31393057594215784,
+        "std_residual": 8.434301540116108,
+        "sigma_multiplier": 3.0,
+        "upper_threshold": 25.61683519629048,
+        "lower_threshold": -24.988974044406163
+    },
+    "dorm_holiday": {
+        "mean_residual": 1.0567556351139897,
+        "std_residual": 8.893916796965406,
+        "sigma_multiplier": 2.5,
+        "upper_threshold": 23.291547627527507,
+        "lower_threshold": -21.178036357299526
+    },
+    "dorm_normal": {
+        "mean_residual": -0.023466923514311535,
+        "std_residual": 8.630547663770109,
+        "sigma_multiplier": 3.0,
+        "upper_threshold": 25.868176067796014,
+        "lower_threshold": -25.91510991482464
+    },
+    "lecture_break": {
+        "mean_residual": -0.09689522820586398,
+        "std_residual": 1.3899733621592847,
+        "sigma_multiplier": 3.0,
+        "upper_threshold": 4.07302485827199,
+        "lower_threshold": -4.2668153146837176
+    },
+    "lecture_exam_period": {
+        "mean_residual": -0.6845891888236733,
+        "std_residual": 4.910929560951101,
+        "sigma_multiplier": 3.5,
+        "upper_threshold": 16.50366427450518,
+        "lower_threshold": -17.872842652152524
+    },
+    "lecture_holiday": {
+        "mean_residual": -0.38964317223257905,
+        "std_residual": 1.4435686799487295,
+        "sigma_multiplier": 2.5,
+        "upper_threshold": 3.2192785276392444,
+        "lower_threshold": -3.998564872104403
+    },
+    "lecture_normal": {
+        "mean_residual": 0.08649417521395239,
+        "std_residual": 4.974840555848347,
+        "sigma_multiplier": 3.0,
+        "upper_threshold": 15.011015842758994,
+        "lower_threshold": -14.83802749233109
+    },
+    "library_break": {
+        "mean_residual": 0.031801778414106086,
+        "std_residual": 2.839466236558748,
+        "sigma_multiplier": 3.0,
+        "upper_threshold": 8.55020048809035,
+        "lower_threshold": -8.486596931262138
+    },
+    "library_exam_period": {
+        "mean_residual": 0.3176088216078106,
+        "std_residual": 7.452461317586643,
+        "sigma_multiplier": 3.0,
+        "upper_threshold": 22.674992774367738,
+        "lower_threshold": -22.03977513115212
+    },
+    "library_holiday": {
+        "mean_residual": 1.2790995705777586,
+        "std_residual": 3.030365268620397,
+        "sigma_multiplier": 2.5,
+        "upper_threshold": 8.85501274212875,
+        "lower_threshold": -6.296813600973233
+    },
+    "library_normal": {
+        "mean_residual": -0.11774219752740574,
+        "std_residual": 4.320475084154479,
+        "sigma_multiplier": 3.0,
+        "upper_threshold": 12.843683054936031,
+        "lower_threshold": -13.079167449990843
+    }
+}

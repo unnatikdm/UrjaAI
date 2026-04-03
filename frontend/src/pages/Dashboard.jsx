@@ -5,6 +5,7 @@ import RecommendationsPanel from '../components/RecommendationsPanel'
 import ExplainabilitySection from '../components/ExplainabilitySection'
 import WhatIfControls from '../components/WhatIfControls'
 import SustainabilityPanel from '../components/SustainabilityPanel'
+import AnomalyAlertPanel from '../components/AnomalyAlertPanel'
 import { useDashboard } from '../hooks/useDashboard'
 
 export default function Dashboard() {
@@ -57,6 +58,7 @@ export default function Dashboard() {
                     {/* Left column — chart + explainability */}
                     <div className="xl:col-span-2 space-y-6">
                         <ForecastChart forecast={forecast} whatIfResult={whatIfResult} />
+                        <AnomalyAlertPanel />
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <ExplainabilitySection explanation={explanation} />
