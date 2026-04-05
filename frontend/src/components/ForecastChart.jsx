@@ -31,7 +31,7 @@ function CustomTooltip({ active, payload, label }) {
 }
 
 
-export default function ForecastChart({ forecast, whatIfResult }) {
+export default function ForecastChart({ forecast, whatIfResult, buildingName }) {
     if (!forecast) {
         return <div className="card p-6 h-72 animate-pulse bg-beige/50" />
     }
@@ -48,8 +48,15 @@ export default function ForecastChart({ forecast, whatIfResult }) {
 
     return (
         <div className="card p-6">
-            <div className="flex items-center justify-between mb-5">
-                <p className="section-title mb-0">24-Hour Forecast</p>
+            <div className="flex items-center justify-between mb-5 flex-wrap gap-2">
+                <div className="flex items-center gap-3">
+                    <p className="section-title mb-0">24-Hour Forecast</p>
+                    {buildingName && (
+                        <span className="text-xs text-ink-muted bg-surface-sunken border border-border-subtle rounded-full px-3 py-1 font-medium">
+                            📍 {buildingName}
+                        </span>
+                    )}
+                </div>
                 {whatIfResult && (
                     <p className="text-xs text-primary-dark bg-primary-xlight border border-primary-light rounded-full px-3 py-1 font-medium">
                         What-If active

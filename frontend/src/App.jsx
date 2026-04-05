@@ -3,6 +3,7 @@ import Dashboard from './pages/Dashboard'
 import SpecialFeatures from './pages/SpecialFeatures'
 import DeepRecommendations from './pages/DeepRecommendations'
 import EnhancedRecommendations from './pages/EnhancedRecommendations'
+import Billing from './pages/Billing'
 import Login from './pages/Login'
 import ProtectedRoute from './components/ProtectedRoute'
 
@@ -40,6 +41,14 @@ export default function App() {
                     element={
                         <ProtectedRoute>
                             <EnhancedRecommendations />
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path="/billing"
+                    element={
+                        <ProtectedRoute>
+                            <Billing />
                         </ProtectedRoute>
                     }
                 />

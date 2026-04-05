@@ -1,0 +1,47 @@
+interactive rebase in progress; onto 3bd20801
+Last commands done (2 commands done):
+   pick 0547eff2 Add content to deletelater.txt
+   pick 2ee4bde2 feat: full stack urja ai - fastapi backend + react dashboard
+Next commands to do (9 remaining commands):
+   pick 3923019a feat: complete ML integration with XGBoost/LightGBM ensemble
+   pick 1fd63d8a fix: gitignore db, add README, fix login redirect + chart tooltip
+  (use "git rebase --edit-todo" to view and edit)
+You are currently rebasing branch 'main' on '3bd20801'.
+  (fix conflicts and then run "git rebase --continue")
+  (use "git rebase --skip" to skip this patch)
+  (use "git rebase --abort" to check out the original branch)
+
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+	new file:   backend/app/models/__init__.py
+
+Unmerged paths:
+  (use "git restore --staged <file>..." to unstage)
+  (use "git add <file>..." to mark resolution)
+	both added:      .gitignore
+	both added:      backend/.env.example
+	both added:      backend/app/main.py
+	both added:      backend/app/routers/explain.py
+	both added:      backend/app/routers/predict.py
+	both added:      backend/app/routers/recommendations.py
+	both added:      backend/app/routers/whatif.py
+	both added:      backend/app/schemas/predict.py
+	both added:      backend/app/services/data.py
+	both added:      backend/app/services/ml.py
+	both added:      backend/requirements.txt
+	both added:      frontend/package-lock.json
+	both added:      frontend/package.json
+	both added:      frontend/src/App.jsx
+	both added:      frontend/src/components/ForecastChart.jsx
+	both added:      frontend/src/components/Header.jsx
+	both added:      frontend/src/components/RecommendationsPanel.jsx
+	both added:      frontend/src/hooks/useDashboard.js
+	both added:      frontend/src/pages/Dashboard.jsx
+	both added:      frontend/src/services/api.js
+	both added:      frontend/vite.config.js
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	status.txt
+	status2.txt
+
