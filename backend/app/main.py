@@ -15,13 +15,16 @@ from app.routers import anomalies
 from app.services.scheduler import create_scheduler
 from app.routers import sustainability
 from app.routers import browniepoint1
-# from app.routers import browniepoint2
 from app.routers import rag_integration
+from app.routers import concierge
+from app.routers import anomaly_notifications
+from app.routers import reports
 from app.services.rag.rag_service import rag_service
 
 # Import models so SQLAlchemy registers them with Base
 import app.models.user    # noqa
 import app.models.reading  # noqa
+import app.models.billing  # noqa
 
 load_dotenv()
 
@@ -36,8 +39,6 @@ async def lifespan(app: FastAPI):
     scheduler = create_scheduler()
     scheduler.start()
     print("[Urja AI] DB ready. Scheduler started — ingesting every 15 min.")
-
-    # # from app.services.tabtransformer_manager import manager
 
     # Initialize RAG Service (handled by rag_integration router startup)
     # try:
@@ -87,11 +88,12 @@ app.include_router(whatif.router)
 app.include_router(ingest_router.router)
 app.include_router(sustainability.router)
 app.include_router(browniepoint1.router)
-# app.include_router(browniepoint2.router)
-# app.include_router(rag.router)
 app.include_router(rag_integration.router)
 app.include_router(enhanced_recommendations.router)
 app.include_router(anomalies.router)
+app.include_router(concierge.router)
+app.include_router(anomaly_notifications.router)
+app.include_router(reports.router)
 
 
 @app.get("/", tags=["Health"])

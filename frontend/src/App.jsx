@@ -6,6 +6,8 @@ import EnhancedRecommendations from './pages/EnhancedRecommendations'
 import Billing from './pages/Billing'
 import Login from './pages/Login'
 import ProtectedRoute from './components/ProtectedRoute'
+import UrjaConcierge from './components/UrjaConcierge'
+import AnomalyNotifications from './components/AnomalyNotifications'
 
 export default function App() {
     return (
@@ -55,6 +57,10 @@ export default function App() {
                 {/* Catch-all */}
                 <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
+            {/* Real-time Anomaly Notifications */}
+            <AnomalyNotifications />
+            {/* Floating AI Assistant - Available on every page */}
+            <UrjaConcierge />
         </BrowserRouter>
     )
 }

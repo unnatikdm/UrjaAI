@@ -21,3 +21,4 @@ scikit-learn>=1.4.0
 numpy>=1.26.0
 sentence-transformers>=2.2.0
 faiss-cpu>=1.7.0
+psycopg2-binary>=2.9.0

@@ -9,6 +9,7 @@ import SustainabilityPanel from '../components/SustainabilityPanel'
 import AnomalyAlertPanel from '../components/AnomalyAlertPanel'
 import CampusBlueprint from '../components/CampusBlueprint'
 import BuildingSelector from '../components/BuildingSelector'
+import WeeklyDigest from '../components/WeeklyDigest'
 import { useDashboard } from '../hooks/useDashboard'
 
 /* Map from campus-blueprint room IDs → backend building IDs */
@@ -61,6 +62,15 @@ export default function Dashboard() {
             <Header />
 
             <main className="flex-1 px-4 sm:px-6 py-6 max-w-[1600px] mx-auto w-full">
+                {/* Top action bar */}
+                <div className="flex items-center justify-between mb-6">
+                    <div>
+                        <h1 className="text-2xl font-bold text-ink-default">Energy Dashboard</h1>
+                        <p className="text-sm text-ink-soft">Real-time campus energy optimization</p>
+                    </div>
+                    <WeeklyDigest />
+                </div>
+
                 {/* Error banner */}
                 {error && (
                     <div className="mb-6 bg-red-50 border border-red-200 text-red-600 rounded-xl px-4 py-3 text-sm flex items-center gap-2">
